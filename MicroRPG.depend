@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1380119916 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main.cpp
+	"micro_rpg.h"
+	"main_loop.h"
+
+1380115896 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
+	<windows.h>
+	<unistd.h>
+	<stdlib.h>
+	<stdio.h>
+
+1380119916 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
+	"main_loop.h"
+
+1380116841 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.h
+	"micro_rpg.h"
+	<GL/glx.h>
+	<GL/gl.h>
+	<X11/X.h>
+	<X11/keysym.h>
+
