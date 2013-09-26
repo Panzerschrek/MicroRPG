@@ -38,7 +38,7 @@ float Microbe::Y()
 
 inline float Microbe::Dir()
 {
-    direction;
+    return direction;
 }
 
 #endif//MICROBE_H

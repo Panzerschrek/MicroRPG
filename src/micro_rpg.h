@@ -6,8 +6,8 @@
 #define MRPG_DEBUG
 
 //platform defenition
-//#define MRPG_OS_GNU_LINUX
-#define MRPG_OS_WIN32
+#define MRPG_OS_GNU_LINUX
+//#define MRPG_OS_WIN32
 //platform defenition
 
 

@@ -8,10 +8,10 @@
 #ifdef MRPG_OS_WIN32
 #include "GL/wglext.h"
 #else
-#include "GL/glxext.h"
+//#include "GL/glxext.h"
 #include <GL/glx.h>
 #include <X11/X.h>
-#include <X11/keysym.h
+#include <X11/keysym.h>
 #endif
 
 #include "GL/glext.h"

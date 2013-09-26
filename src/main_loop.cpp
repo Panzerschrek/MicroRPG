@@ -7,17 +7,17 @@ MainLoop* MainLoop::current_main_loop= NULL;
 #ifdef MRPG_OS_WIN32
 LRESULT CALLBACK MainLoop::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if( uMsg == WM_CLOSE )
-		PostQuitMessage(0);
-	switch( uMsg )
-	{
-	case WM_CLOSE:
-		exit(0);
-	
-		break;
-	}
+    if( uMsg == WM_CLOSE )
+        PostQuitMessage(0);
+    switch( uMsg )
+    {
+    case WM_CLOSE:
+        exit(0);
 
-	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+        break;
+    }
+
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
 #endif//win32
@@ -27,10 +27,10 @@ inline void MainLoop::InitOGL()
 {
 #ifdef MRPG_OS_WIN32
 
-	int border_size, top_border_size, bottom_border_size;
-	static const char* WINDOW_NAME= "MicroRPG";
+    int border_size, top_border_size, bottom_border_size;
+    static const char* WINDOW_NAME= "MicroRPG";
 
-	window_class.cbSize = sizeof(WNDCLASSEX);
+    window_class.cbSize = sizeof(WNDCLASSEX);
     window_class.style = CS_OWNDC;
     window_class.lpfnWndProc = WindowProc;
     window_class.cbClsExtra = 0;
@@ -43,12 +43,12 @@ inline void MainLoop::InitOGL()
     window_class.lpszClassName = WINDOW_NAME;
     window_class.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 
-	
+
     if ( ! RegisterClassEx( &window_class ) )
         goto display_error;
 
 
-	border_size=  GetSystemMetrics(SM_CXFIXEDFRAME);
+    border_size=  GetSystemMetrics(SM_CXFIXEDFRAME);
     bottom_border_size= GetSystemMetrics(SM_CYFIXEDFRAME);
     top_border_size= bottom_border_size + GetSystemMetrics(SM_CYCAPTION);
 
@@ -72,7 +72,7 @@ inline void MainLoop::InitOGL()
     hdc= GetDC( hwnd );
 
 
-	wglMakeCurrent( 0, 0 );
+    wglMakeCurrent( 0, 0 );
     PIXELFORMATDESCRIPTOR pfd;
     int format;
 
@@ -88,29 +88,29 @@ inline void MainLoop::InitOGL()
 
     format= ChoosePixelFormat(hdc, &pfd);
     SetPixelFormat(hdc, format, &pfd);
-   
 
-  /*  HGLRC temp_rc= wglCreateContext( hdc );
-    wglMakeCurrent( hdc, temp_rc );
 
-   
-    PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB= NULL;
-    wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
+    /*  HGLRC temp_rc= wglCreateContext( hdc );
+      wglMakeCurrent( hdc, temp_rc );
 
-    wglMakeCurrent( NULL, NULL );
-    wglDeleteContext( temp_rc );
 
-    int attribs[] =
-    {
-        WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
-        WGL_CONTEXT_MINOR_VERSION_ARB, 3,
-        WGL_CONTEXT_FLAGS_ARB,        0x0002,
-       0x9126, 0x00000001,
-        0
-    };
+      PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB= NULL;
+      wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
 
-    hrc= wglCreateContextAttribsARB( hdc, 0, attribs );*/
-	hrc= wglCreateContext( hdc );
+      wglMakeCurrent( NULL, NULL );
+      wglDeleteContext( temp_rc );
+
+      int attribs[] =
+      {
+          WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
+          WGL_CONTEXT_MINOR_VERSION_ARB, 3,
+          WGL_CONTEXT_FLAGS_ARB,        0x0002,
+         0x9126, 0x00000001,
+          0
+      };
+
+      hrc= wglCreateContextAttribsARB( hdc, 0, attribs );*/
+    hrc= wglCreateContext( hdc );
     wglMakeCurrent( hdc, hrc );
 
 #else
@@ -147,7 +147,7 @@ inline void MainLoop::InitOGL()
     swa.event_mask = KeyPressMask    | ExposureMask
                      | ButtonPressMask | StructureNotifyMask;
     win = XCreateWindow(dpy, RootWindow(dpy, vi->screen), 0, 0,
-                        300, 300, 0, vi->depth, InputOutput, vi->visual,
+                        screen_x, screen_y, 0, vi->depth, InputOutput, vi->visual,
                         CWBorderPixel | CWColormap | CWEventMask, &swa);
     XSetStandardProperties(dpy, win, "main", "main", None,
                            NULL, 0, NULL);
@@ -158,14 +158,14 @@ inline void MainLoop::InitOGL()
 
 #endif
 
-		return;
-	display_error:
+    return;
+display_error:
     exit(1024);
 }
 
 inline void MainLoop::SetupOGLState()
 {
-	 //gl state initialisation
+    //gl state initialisation
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glClearDepth(1.0f);
@@ -183,15 +183,15 @@ MainLoop::MainLoop()
 
     screen_x= 640;
     screen_y= 480;
-	current_main_loop= this;
+    current_main_loop= this;
 
-	InitOGL();
-	SetupOGLState();
+    InitOGL();
+    SetupOGLState();
 }
 
 inline void MainLoop::Draw()
 {
-	 static float ang= 0.0f;
+    static float ang= 0.0f;
 
     ang+=5.0f;
 
@@ -241,14 +241,14 @@ void MainLoop::Loop()
 
 #ifdef MRPG_OS_WIN32
 
-	MSG msg;
-	 while (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
-     {
-          
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-           
-     }
+    MSG msg;
+    while (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
+    {
+
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+
+    }
 #else
     XEvent               event;
     while(XPending(dpy)) /* loop to compress events */
@@ -284,16 +284,17 @@ void MainLoop::Loop()
 
         case Expose:
             break;
+
         }
 
     }
 
 #endif
 
-	Draw();
+    Draw();
 
 #ifdef MRPG_OS_WIN32
-	SwapBuffers(hdc);
+    SwapBuffers(hdc);
 #else
     glXSwapBuffers(dpy, win);
 #endif

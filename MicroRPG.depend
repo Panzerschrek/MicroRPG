@@ -1,21 +1,46 @@
 # depslib dependency file v1.0
-1380119916 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main.cpp
+1380179495 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main.cpp
 	"micro_rpg.h"
 	"main_loop.h"
 
-1380115896 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
+1380202232 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
 	<windows.h>
 	<unistd.h>
 	<stdlib.h>
 	<stdio.h>
 
-1380119916 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
+1380205464 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
 	"main_loop.h"
 
-1380116841 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.h
+1380202260 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.h
 	"micro_rpg.h"
-	<GL/glx.h>
 	<GL/gl.h>
+	"GL/wglext.h"
+	<GL/glx.h>
 	<X11/X.h>
 	<X11/keysym.h>
+	"GL/glext.h"
+
+1380186167 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/level.cpp
+
+1345797492 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/GL/wglext.h
+	<windows.h>
+
+1345796926 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/GL/glext.h
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1380186952 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/microbe.cpp
+	"microbe.h"
+
+1380202273 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/microbe.h
+	"game_constants.h"
+
+1380186941 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/game_constants.h
 

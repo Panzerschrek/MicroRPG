@@ -35,10 +35,16 @@
 			<Add library="X11" />
 			<Add library="GL" />
 		</Linker>
+		<Unit filename="src/game_constants.h" />
+		<Unit filename="src/level.cpp" />
+		<Unit filename="src/level.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/main_loop.cpp" />
 		<Unit filename="src/main_loop.h" />
 		<Unit filename="src/micro_rpg.h" />
+		<Unit filename="src/microbe.cpp" />
+		<Unit filename="src/microbe.h" />
+		<Unit filename="src/player.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -1,1 +1,1 @@
-1024 - could not open display
+1024 - Ошибка создания окна и контекств OpenGL
