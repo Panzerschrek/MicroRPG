@@ -45,6 +45,10 @@
 		<Unit filename="src/microbe.cpp" />
 		<Unit filename="src/microbe.h" />
 		<Unit filename="src/player.h" />
+		<Unit filename="src/renderer.cpp" />
+		<Unit filename="src/renderer.h" />
+		<Unit filename="src/text.cpp" />
+		<Unit filename="src/text.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

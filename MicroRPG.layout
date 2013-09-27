@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Release" />
-	<File name="src/main.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="133" topLine="0" />
+	<ActiveTarget name="Debug" />
+	<File name="src/level.cpp" open="1" top="0" tabpos="10">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/main_loop.cpp" open="1" top="1" tabpos="0">
-		<Cursor position="6678" topLine="250" />
+	<File name="src/level.h" open="1" top="0" tabpos="9">
+		<Cursor position="76" topLine="0" />
 	</File>
-	<File name="src/main_loop.h" open="0" top="0" tabpos="2">
-		<Cursor position="139" topLine="0" />
+	<File name="src/main.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="136" topLine="0" />
 	</File>
-	<File name="src/micro_rpg.h" open="0" top="0" tabpos="3">
-		<Cursor position="113" topLine="2" />
+	<File name="src/main_loop.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="6391" topLine="214" />
 	</File>
-	<File name="src/microbe.h" open="0" top="0" tabpos="0">
-		<Cursor position="525" topLine="15" />
+	<File name="src/main_loop.h" open="1" top="0" tabpos="6">
+		<Cursor position="405" topLine="0" />
+	</File>
+	<File name="src/micro_rpg.h" open="1" top="0" tabpos="2">
+		<Cursor position="376" topLine="5" />
+	</File>
+	<File name="src/microbe.h" open="1" top="0" tabpos="7">
+		<Cursor position="466" topLine="16" />
+	</File>
+	<File name="src/player.h" open="1" top="0" tabpos="8">
+		<Cursor position="119" topLine="0" />
+	</File>
+	<File name="src/renderer.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="248" topLine="0" />
+	</File>
+	<File name="src/renderer.h" open="1" top="0" tabpos="3">
+		<Cursor position="273" topLine="0" />
+	</File>
+	<File name="src/text.h" open="1" top="1" tabpos="11">
+		<Cursor position="220" topLine="6" />
 	</File>
 </CodeBlocks_layout_file>
