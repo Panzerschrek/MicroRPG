@@ -1,5 +1,5 @@
 #include "main_loop.h"
-
+#include "gl_functions.h"
 
 MainLoop* MainLoop::current_main_loop= NULL;
 
@@ -194,6 +194,7 @@ MainLoop::MainLoop( Level* l, Player* p ):
     current_main_loop= this;
 
     InitOGL();
+    GetGLFunctions();
     SetupOGLState();
 
    renderer= new Renderer( level, player );
