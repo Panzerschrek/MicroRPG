@@ -1,6 +1,8 @@
 #ifndef TEXT_H
 #define TEXT_H
 
+#include "micro_rpg.h"
+
 #pragma pack( push, 1 )
 struct TextVertex
 {
@@ -15,22 +17,22 @@ class Text
 {
 	public:
 
-	void Text();
-	void Text(){}
+	Text();
+	~Text(){}
 	void AddText( unsigned int row, unsigned int colomn, const char* text );
 
 	void Draw();
 
-	Text();
-	~Text(){}
 
 	private:
+
+	void CreateTexture();
 
 	TextVertex* vertices;
 	unsigned int vertex_buffer_size;
 	unsigned int vertex_buffer_pos;
 
-	GLUnit text_texture_id;
+	GLuint font_texture_id;
 
 };
 #endif//TEXT_H

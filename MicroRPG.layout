@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug" />
-	<File name="src/level.cpp" open="1" top="0" tabpos="10">
+	<ActiveTarget name="Release" />
+	<File name="src/level.cpp" open="0" top="0" tabpos="10">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/level.h" open="1" top="0" tabpos="9">
+	<File name="src/level.h" open="0" top="0" tabpos="9">
 		<Cursor position="76" topLine="0" />
 	</File>
-	<File name="src/main.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="136" topLine="0" />
+	<File name="src/main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="172" topLine="0" />
 	</File>
-	<File name="src/main_loop.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="6391" topLine="214" />
+	<File name="src/main_loop.cpp" open="1" top="0" tabpos="8">
+		<Cursor position="5179" topLine="174" />
 	</File>
 	<File name="src/main_loop.h" open="1" top="0" tabpos="6">
-		<Cursor position="405" topLine="0" />
+		<Cursor position="343" topLine="13" />
 	</File>
-	<File name="src/micro_rpg.h" open="1" top="0" tabpos="2">
-		<Cursor position="376" topLine="5" />
+	<File name="src/micro_rpg.h" open="1" top="0" tabpos="5">
+		<Cursor position="522" topLine="20" />
 	</File>
-	<File name="src/microbe.h" open="1" top="0" tabpos="7">
+	<File name="src/microbe.h" open="0" top="0" tabpos="7">
 		<Cursor position="466" topLine="16" />
 	</File>
-	<File name="src/player.h" open="1" top="0" tabpos="8">
+	<File name="src/player.h" open="0" top="0" tabpos="8">
 		<Cursor position="119" topLine="0" />
 	</File>
-	<File name="src/renderer.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="248" topLine="0" />
+	<File name="src/renderer.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="1357" topLine="0" />
 	</File>
-	<File name="src/renderer.h" open="1" top="0" tabpos="3">
-		<Cursor position="273" topLine="0" />
+	<File name="src/renderer.h" open="1" top="0" tabpos="4">
+		<Cursor position="240" topLine="0" />
 	</File>
-	<File name="src/text.h" open="1" top="1" tabpos="11">
-		<Cursor position="220" topLine="6" />
+	<File name="src/text.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="424" topLine="0" />
+	</File>
+	<File name="src/text.h" open="1" top="0" tabpos="3">
+		<Cursor position="224" topLine="10" />
 	</File>
 </CodeBlocks_layout_file>

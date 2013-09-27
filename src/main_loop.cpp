@@ -185,16 +185,18 @@ inline void MainLoop::SetupOGLState()
 }
 
 
-MainLoop::MainLoop( Renderer* r, Level* l, Player* p ):
-renderer(r), level(l), player(p)
+MainLoop::MainLoop( Level* l, Player* p ):
+ level(l), player(p)
 {
 
-    screen_x= 640;
-    screen_y= 480;
+    screen_x= 768;
+    screen_y= 768;
     current_main_loop= this;
 
     InitOGL();
     SetupOGLState();
+
+   renderer= new Renderer( level, player );
 }
 
 void MainLoop::Loop()

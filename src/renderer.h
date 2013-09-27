@@ -4,19 +4,8 @@
 
 #include "player.h"
 #include "level.h"
-
-#include <GL/gl.h>
-
-#ifdef MRPG_OS_WIN32
-#include "GL/wglext.h"
-#else
-//#include "GL/glxext.h"
-#include <GL/glx.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
-#endif
-
-#include "GL/glext.h"
+#include "micro_rpg.h"
+#include "text.h"
 
 
 class Renderer
@@ -30,6 +19,8 @@ class Renderer
 	private:
 	Player* player;
 	Level* level;
+
+	Text text;
 
 
 };

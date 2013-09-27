@@ -27,6 +27,21 @@ inline void usleep(int n ) { Sleep(n/1000); }
 #endif
 
 
+
+
+#include <GL/gl.h>
+
+#ifdef MRPG_OS_WIN32
+#include "GL/wglext.h"
+#else
+//#include "GL/glxext.h"
+#include <GL/glx.h>
+#include <X11/X.h>
+#include <X11/keysym.h>
+#endif
+
+#include "GL/glext.h"
+
 #define MRPG_GL_VERSION 21
 
 

@@ -9,7 +9,7 @@
 class MainLoop
 {
 public:
-    MainLoop( Renderer* r, Level* l, Player* p );
+    MainLoop( Level* l, Player* p );
     ~MainLoop() {}
 
     void Loop();

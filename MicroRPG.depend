@@ -1,19 +1,25 @@
 # depslib dependency file v1.0
-1380253111 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main.cpp
+1380274941 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main.cpp
 	"micro_rpg.h"
 	"main_loop.h"
 	"renderer.h"
 
-1380251976 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
+1380274528 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
 	<windows.h>
 	<unistd.h>
 	<stdlib.h>
 	<stdio.h>
+	<GL/gl.h>
+	"GL/wglext.h"
+	<GL/glx.h>
+	<X11/X.h>
+	<X11/keysym.h>
+	"GL/glext.h"
 
-1380253103 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
+1380279444 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
 	"main_loop.h"
 
-1380253144 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.h
+1380274952 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.h
 	"micro_rpg.h"
 	"renderer.h"
 	"player.h"
@@ -42,23 +48,28 @@
 
 1380186941 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/game_constants.h
 
-1380253148 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.h
+1380274861 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.h
 	"player.h"
 	"level.h"
-	<GL/gl.h>
-	"GL/wglext.h"
-	<GL/glx.h>
-	<X11/X.h>
-	<X11/keysym.h>
-	"GL/glext.h"
+	"micro_rpg.h"
+	"text.h"
 
 1380253167 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/player.h
 	"microbe.h"
 
 1380253177 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/level.h
 
-1380253081 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.cpp
+1380279398 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.cpp
 	"renderer.h"
 
-1380253462 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.cpp
+1380279824 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.cpp
+	"../other/font_data.c"
+	"text.h"
+
+1380273421 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/other/font_data.c
+
+1380279788 /media/9818A8C818A8A6AA/lnk/MicroRPG/other/font_data.c
+
+1380274903 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.h
+	"micro_rpg.h"
 
