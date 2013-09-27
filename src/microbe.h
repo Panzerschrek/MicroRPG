@@ -31,7 +31,7 @@ inline float Microbe::X()
     return x;
 }
 
-float Microbe::Y()
+inline float Microbe::Y()
 {
     return y;
 }

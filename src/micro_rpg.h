@@ -27,4 +27,7 @@ inline void usleep(int n ) { Sleep(n/1000); }
 #endif
 
 
+#define MRPG_GL_VERSION 21
+
+
 #endif//MICRO_RPG_H

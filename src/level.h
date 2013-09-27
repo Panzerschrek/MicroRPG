@@ -5,8 +5,8 @@
 class Level
 {
 public:
-    Level();
-    ~Level();
+    Level(){}
+    ~Level(){}
 
     void PhysTick();
 private:

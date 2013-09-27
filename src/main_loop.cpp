@@ -158,6 +158,13 @@ inline void MainLoop::InitOGL()
 
 #endif
 
+	int ver[2];
+	glGetIntegerv( GL_MAJOR_VERSION, ver );
+	glGetIntegerv( GL_MINOR_VERSION, ver + 1 );
+	if( ver[0] * 10 + ver[1] < MRPG_GL_VERSION )
+		exit(1025);
+
+
     return;
 display_error:
     exit(1024);
@@ -178,7 +185,8 @@ inline void MainLoop::SetupOGLState()
 }
 
 
-MainLoop::MainLoop()
+MainLoop::MainLoop( Renderer* r, Level* l, Player* p ):
+renderer(r), level(l), player(p)
 {
 
     screen_x= 640;
@@ -187,53 +195,6 @@ MainLoop::MainLoop()
 
     InitOGL();
     SetupOGLState();
-}
-
-inline void MainLoop::Draw()
-{
-    static float ang= 0.0f;
-
-    ang+=5.0f;
-
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glTranslatef(0.0f, 0.0f, -3.0f);
-    glRotatef( ang, 0.0f, 1.0f, 0.0f );
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    /* front face */
-    glBegin(GL_QUADS);
-    glColor3f(0.0f, 0.7f, 0.1f);  /* green */
-    glVertex3f(-1.0f, 1.0f, 1.0f);
-    glVertex3f(1.0f, 1.0f, 1.0f);
-    glVertex3f(1.0f, -1.0f, 1.0f);
-    glVertex3f(-1.0f, -1.0f, 1.0f);
-
-    /* back face */
-    glColor3f(0.9, 1.0f, 0.0f);  /* yellow */
-    glVertex3f(-1.0f, 1.0f, -1.0f);
-    glVertex3f(1.0f, 1.0f, -1.0f);
-    glVertex3f(1.0f, -1.0f, -1.0f);
-    glVertex3f(-1.0f, -1.0f, -1.0f);
-
-    /* top side face */
-    glColor3f(0.2, 0.2, 1.0f);  /* blue */
-    glVertex3f(-1.0f, 1.0f, 1.0f);
-    glVertex3f(1.0f, 1.0f, 1.0f);
-    glVertex3f(1.0f, 1.0f, -1.0f);
-    glVertex3f(-1.0f, 1.0f, -1.0f);
-
-    /* bottom side face */
-    glColor3f(0.7, 0.0f, 0.1);  /* red */
-    glVertex3f(-1.0f, -1.0f, 1.0f);
-    glVertex3f(1.0f, -1.0f, 1.0f);
-    glVertex3f(1.0f, -1.0f, -1.0f);
-    glVertex3f(-1.0f, -1.0f, -1.0f);
-    glEnd();
-
-    glClearColor( 1.0f, 0.0f, 1.0f, 1.0f );
 }
 
 void MainLoop::Loop()
@@ -291,7 +252,7 @@ void MainLoop::Loop()
 
 #endif
 
-    Draw();
+    renderer->Draw();
 
 #ifdef MRPG_OS_WIN32
     SwapBuffers(hdc);

@@ -1,26 +1,15 @@
 #ifndef MAIN_LOOP_H
 #define MAIN_LOOP_H
 #include "micro_rpg.h"
-
-
-#include <GL/gl.h>
-
-#ifdef MRPG_OS_WIN32
-#include "GL/wglext.h"
-#else
-//#include "GL/glxext.h"
-#include <GL/glx.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
-#endif
-
-#include "GL/glext.h"
+#include "renderer.h"
+#include "player.h"
+#include "level.h"
 
 
 class MainLoop
 {
 public:
-    MainLoop();
+    MainLoop( Renderer* r, Level* l, Player* p );
     ~MainLoop() {}
 
     void Loop();
@@ -30,9 +19,13 @@ private:
 
 	void InitOGL();
 	void SetupOGLState();
-	void Draw();
 
 	int screen_x, screen_y;
+
+
+	Player* player;
+	Renderer* renderer;
+	Level* level;
 
 #ifdef MRPG_OS_WIN32
 
