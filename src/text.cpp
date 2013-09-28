@@ -14,7 +14,7 @@ void Text::CreateTexture()
 
 	for( unsigned int i= 0; i< FONT_BITMAP_WIDTH * FONT_BITMAP_HEIGHT / 8; i++ )
 		for( unsigned int j= 0; j< 8; j++ )
-					uncompressed_font[ i*8 + j ]= ( ( font_data[i] & (1<<j) ) == 0 ) ? 0 : 255;
+					uncompressed_font[ i*8 + j ]= ( ( font_data[i] & (1<<(8-j)) ) == 0 ) ? 0 : 255;
 
 
 
@@ -42,8 +42,8 @@ void Text::AddText( unsigned int row, unsigned int colomn, unsigned int size, co
 	float x, y;
 	float dx, dy;
 
-	x=  2.0f * float( row * LETTER_WIDTH ) / screen_x - 1.0f;
-	y=  -2.0f * float( row * LETTER_HEIGHT ) / screen_y + 1.0f;
+	x=  2.0f * float( colomn * LETTER_WIDTH ) / screen_x - 1.0f;
+	y=  -2.0f * float( (row + 1) * LETTER_HEIGHT ) / screen_y + 1.0f;
 
 	dx= 2.0f * float( LETTER_WIDTH ) / screen_x;
 	dy= 2.0f * float( LETTER_HEIGHT ) / screen_y;
@@ -80,28 +80,31 @@ void Text::AddText( unsigned int row, unsigned int colomn, unsigned int size, co
 	vertex_buffer_pos= v - vertices;
 }
 
-//leter_ tc_x_left= ( letter_ascii - 32 ) / 768
 void Text::Draw()
 {
+
 	glEnable( GL_TEXTURE_2D );
 	glBindTexture( GL_TEXTURE_2D, font_texture_id );
 
+    glColor3ub( 255, 255, 127 );
 
 	glBegin( GL_QUADS );
 
 	glTexCoord2f( 0.0f, 0.0f );
-	glVertex2f( -1.0f, -0.2f );
+	glVertex2f( -1.0f, -0.03f );
 
 	glTexCoord2f( 1.0f, 0.0f );
-	glVertex2f( 1.0f, -0.2f );
+	glVertex2f( 1.0f, -0.03f );
 
 	glTexCoord2f( 1.0f, 1.0f );
-	glVertex2f( 1.0f, 0.2f );
+	glVertex2f( 1.0f, 0.03f );
 
 	glTexCoord2f( 0.0f, 1.0f );
-	glVertex2f( -1.0f, 0.2f );
+	glVertex2f( -1.0f, 0.03f );
 
 	glEnd();
+
+    glDisable( GL_TEXTURE_2D );
 }
 
 Text::Text()
@@ -114,4 +117,9 @@ Text::Text()
 	glGetIntegerv( GL_VIEWPORT, v );
 	screen_x= float( v[2] );
 	screen_y= float( v[3] );
+
+    text_vbo.VertexData( NULL, MRPG_MAX_TEXT_BUFFER_SIZE * 4 * sizeof(TextVertex),
+                                    sizeof(TextVertex) );
+
+	text_shader.Create( text_shader_v, text_shader_f );
 }

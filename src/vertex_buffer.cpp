@@ -11,6 +11,7 @@ void VertexBuffer::VertexData( void* data, unsigned int data_size, unsigned int 
 {
 	if( vertex_vbo == 0xffffffff )
 		glGenBuffers( 1, &vertex_vbo );
+    glBindBuffer( GL_ARRAY_BUFFER, vertex_vbo );
 	glBufferData( GL_ARRAY_BUFFER, data_size, data, GL_STATIC_DRAW );
 }
 
@@ -18,6 +19,8 @@ void VertexBuffer::VertexData( void* data, unsigned int data_size, unsigned int 
 void VertexBuffer::IndexData( void* data, unsigned int data_size, GLenum index_type )
 {
 	if( index_vbo == 0xfffffffff )
-		glGenBuffers( 1, &vertex_vbo );
+		glGenBuffers( 1, &index_vbo );
+
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, index_vbo );
 	glBufferData( GL_ELEMENT_ARRAY_BUFFER, data_size, data, GL_STATIC_DRAW );
 }

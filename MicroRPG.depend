@@ -4,11 +4,12 @@
 	"main_loop.h"
 	"renderer.h"
 
-1380274528 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
+1380353558 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
 	<windows.h>
 	<unistd.h>
 	<stdlib.h>
 	<stdio.h>
+	<string.h>
 	<GL/gl.h>
 	"GL/wglext.h"
 	<GL/glx.h>
@@ -16,8 +17,9 @@
 	<X11/keysym.h>
 	"GL/glext.h"
 
-1380279444 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
+1380352307 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
 	"main_loop.h"
+	"gl_functions.h"
 
 1380274952 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.h
 	"micro_rpg.h"
@@ -59,10 +61,10 @@
 
 1380253177 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/level.h
 
-1380279398 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.cpp
+1380338011 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.cpp
 	"renderer.h"
 
-1380280071 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.cpp
+1380356100 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.cpp
 	"../other/font_data.c"
 	"text.h"
 
@@ -70,6 +72,34 @@
 
 1380279788 /media/9818A8C818A8A6AA/lnk/MicroRPG/other/font_data.c
 
-1380274903 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.h
+1380356204 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.h
 	"micro_rpg.h"
+	"vertex_buffer.h"
+	"glsl_program.h"
+	"shaders.h"
+
+1380356647 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/gl_functions.cpp
+	"gl_functions.h"
+
+1380339734 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/vertex_buffer.cpp
+	"vertex_buffer.h"
+
+1380290979 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/vertex_buffer.h
+	"micro_rpg.h"
+	"gl_functions.h"
+
+1380356583 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/gl_functions.h
+	"micro_rpg.h"
+
+1380356662 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/glsl_program.cpp
+	"glsl_program.h"
+	"gl_functions.h"
+
+1380355640 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/glsl_program.h
+	"micro_rpg.h"
+	"gl_functions.h"
+
+1380356146 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/shaders.h
+
+1380356080 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/shaders.cpp
 

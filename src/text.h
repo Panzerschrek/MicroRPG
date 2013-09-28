@@ -2,6 +2,9 @@
 #define TEXT_H
 
 #include "micro_rpg.h"
+#include "vertex_buffer.h"
+#include "glsl_program.h"
+#include "shaders.h"
 
 #pragma pack( push, 1 )
 struct TextVertex
@@ -30,7 +33,9 @@ class Text
 
 	void CreateTexture();
 
+	GLSLProgram text_shader;
 	TextVertex* vertices;
+    VertexBuffer text_vbo;
 	unsigned int vertex_buffer_size;
 	unsigned int vertex_buffer_pos;
 	float screen_x, screen_y;

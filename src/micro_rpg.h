@@ -5,15 +5,9 @@
 
 #define MRPG_DEBUG
 
-//platform defenition
-#define MRPG_OS_GNU_LINUX
-//#define MRPG_OS_WIN32
-//platform defenition
 
 
-
-
-#ifdef MRPG_OS_WIN32
+#ifdef MRPG_OS_WINDOWS
 #include <windows.h>
 inline void usleep(int n ) { Sleep(n/1000); }
 #else
@@ -24,6 +18,7 @@ inline void usleep(int n ) { Sleep(n/1000); }
 #ifdef MRPG_DEBUG
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #endif
 
 
@@ -31,7 +26,7 @@ inline void usleep(int n ) { Sleep(n/1000); }
 
 #include <GL/gl.h>
 
-#ifdef MRPG_OS_WIN32
+#ifdef MRPG_OS_WINDOWS
 #include "GL/wglext.h"
 #else
 //#include "GL/glxext.h"

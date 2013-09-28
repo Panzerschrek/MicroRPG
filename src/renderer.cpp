@@ -28,14 +28,14 @@ void Renderer::Draw()
     glVertex3f(-1.0f, -1.0f, 1.0f);
 
     /* back face */
-    glColor3f(0.9, 1.0f, 0.0f);  /* yellow */
+    glColor3f(0.9f, 1.0f, 0.0f);  /* yellow */
     glVertex3f(-1.0f, 1.0f, -1.0f);
     glVertex3f(1.0f, 1.0f, -1.0f);
     glVertex3f(1.0f, -1.0f, -1.0f);
     glVertex3f(-1.0f, -1.0f, -1.0f);
 
     /* top side face */
-    glColor3f(0.2, 0.2, 1.0f);  /* blue */
+    glColor3f(0.2f, 0.2f, 1.0f);  /* blue */
     glVertex3f(-1.0f, 1.0f, 1.0f);
     glVertex3f(1.0f, 1.0f, 1.0f);
     glVertex3f(1.0f, 1.0f, -1.0f);

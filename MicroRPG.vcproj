@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				PreprocessorDefinitions="MRPG_OS_WIN32"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -111,8 +112,13 @@
 				Optimization="1"
 				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="2"
+				PreprocessorDefinitions="MRPG_OS_WIN32"
+				ExceptionHandling="0"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
+				ExpandAttributedSource="false"
+				AssemblerOutput="4"
+				AssemblerListingLocation="$(IntDir)\asm\"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -129,6 +135,7 @@
 				Name="VCLinkerTool"
 				OutputFile="MicroRPG.exe"
 				GenerateDebugInformation="false"
+				TerminalServerAware="0"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				OptimizeForWindows98="0"
@@ -166,11 +173,27 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\src\gl_functions.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\main.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\src\main_loop.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\microbe.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\renderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\vertex_buffer.cpp"
 				>
 			</File>
 		</Filter>
@@ -181,6 +204,10 @@
 			>
 			<File
 				RelativePath=".\src\game_constants.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\gl_functions.h"
 				>
 			</File>
 			<File
@@ -200,15 +227,27 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\microbe.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\src\microbe.h"
 				>
 			</File>
 			<File
 				RelativePath=".\src\player.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\renderer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\text.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\text.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\vertex_buffer.h"
 				>
 			</File>
 		</Filter>

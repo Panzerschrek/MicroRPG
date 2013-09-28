@@ -4,7 +4,7 @@
 MainLoop* MainLoop::current_main_loop= NULL;
 
 
-#ifdef MRPG_OS_WIN32
+#ifdef MRPG_OS_WINDOWS
 LRESULT CALLBACK MainLoop::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if( uMsg == WM_CLOSE )
@@ -20,12 +20,12 @@ LRESULT CALLBACK MainLoop::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-#endif//win32
+#endif//win
 
 
 inline void MainLoop::InitOGL()
 {
-#ifdef MRPG_OS_WIN32
+#ifdef MRPG_OS_WINDOWS
 
     int border_size, top_border_size, bottom_border_size;
     static const char* WINDOW_NAME= "MicroRPG";
@@ -203,7 +203,7 @@ MainLoop::MainLoop( Level* l, Player* p ):
 void MainLoop::Loop()
 {
 
-#ifdef MRPG_OS_WIN32
+#ifdef MRPG_OS_WINDOWS
 
     MSG msg;
     while (PeekMessage(&msg,NULL,0,0,PM_REMOVE))
@@ -215,7 +215,7 @@ void MainLoop::Loop()
     }
 #else
     XEvent               event;
-    while(XPending(dpy)) /* loop to compress events */
+    while(XPending(dpy))
     {
 
 
@@ -257,7 +257,7 @@ void MainLoop::Loop()
 
     renderer->Draw();
 
-#ifdef MRPG_OS_WIN32
+#ifdef MRPG_OS_WINDOWS
     SwapBuffers(hdc);
 #else
     glXSwapBuffers(dpy, win);

@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
+	<File name="src/gl_functions.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="3387" topLine="63" />
+	</File>
+	<File name="src/gl_functions.h" open="1" top="0" tabpos="4">
+		<Cursor position="990" topLine="0" />
+	</File>
+	<File name="src/glsl_program.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="1493" topLine="30" />
+	</File>
+	<File name="src/glsl_program.h" open="1" top="0" tabpos="2">
+		<Cursor position="95" topLine="0" />
+	</File>
+	<File name="src/main_loop.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="5613" topLine="61" />
+	</File>
+	<File name="src/main_loop.h" open="1" top="0" tabpos="9">
+		<Cursor position="343" topLine="13" />
+	</File>
+	<File name="src/micro_rpg.h" open="0" top="0" tabpos="0">
+		<Cursor position="266" topLine="14" />
+	</File>
+	<File name="src/shaders.cpp" open="1" top="1" tabpos="7">
+		<Cursor position="369" topLine="0" />
+	</File>
+	<File name="src/shaders.h" open="1" top="0" tabpos="8">
+		<Cursor position="104" topLine="0" />
+	</File>
+	<File name="src/text.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="2832" topLine="97" />
+	</File>
+	<File name="src/text.h" open="1" top="0" tabpos="6">
+		<Cursor position="127" topLine="0" />
+	</File>
 </CodeBlocks_layout_file>
