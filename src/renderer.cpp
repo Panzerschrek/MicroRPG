@@ -1,6 +1,7 @@
 #include "renderer.h"
 #include "shaders.h"
 #include "math.h"
+#include "microbe.h"
 
 #define BODY_DEPTH -0.5f
 #define SHELL_DEPTH -0.4f
@@ -39,9 +40,14 @@ void Renderer::Draw()
 
     microbes_shader.Bind();
 
-    DrawMicrobeBody(0.0f,0.0f);
+    for (int i=0; i<level->getLastMicrobeIndex(); ++i)
+    {
+        Microbe* microbe = level->getMicrobe(i);
+        DrawMicrobeBody(microbe->X(), microbe->Y());
+    }
+    /*DrawMicrobeBody(0.0f,0.0f);
      DrawMicrobeBody(0.5f,0.5f);
-      DrawMicrobeBody(-0.5f,-0.2f);
+      DrawMicrobeBody(-0.5f,-0.2f);*/
 
     unsigned char color[]= { 245, 240, 255, 128 };
     text.AddText( 0, 2, 2, color, "MicroRPG - a microbic 64k game" );
