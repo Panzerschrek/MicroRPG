@@ -6,7 +6,16 @@
 #include "level.h"
 #include "micro_rpg.h"
 #include "text.h"
+#include "vertex_buffer.h"
+#include "glsl_program.h"
 
+#pragma pack( push, 1 )
+struct MicrobeVertex
+{
+    float pos[3];
+    unsigned char color[4];
+};
+#pragma pack(pop)
 
 class Renderer
 {
@@ -17,6 +26,11 @@ class Renderer
 	void Draw();
 
 	private:
+
+    void DrawMicrobeBody( float x, float y );
+
+    VertexBuffer microbes_vbo;
+    GLSLProgram microbes_shader;
 	Player* player;
 	Level* level;
 

@@ -79,7 +79,7 @@ void GLSLProgram::Create( const char* vertex_shader, const char* fragment_shader
 }
 
 
-void GLSLProgram::UniformI	( unsigned int uniform_id, int i )
+void GLSLProgram::UniformInt	( unsigned int uniform_id, int i )
 {
     glUniform1i( uniforms[ uniform_id ], i );
 }

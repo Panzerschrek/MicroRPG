@@ -1,10 +1,7 @@
 #ifndef MICRO_RPG_H
 #define MICRO_RPG_H
 
-
-
 #define MRPG_DEBUG
-
 
 
 #ifdef MRPG_OS_WINDOWS
@@ -14,13 +11,13 @@ inline void usleep(int n ) { Sleep(n/1000); }
 #include <unistd.h>
 #endif
 
-
 #ifdef MRPG_DEBUG
-#include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #endif
 
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
 
 
 
@@ -34,7 +31,6 @@ inline void usleep(int n ) { Sleep(n/1000); }
 #include <X11/X.h>
 #include <X11/keysym.h>
 #endif
-
 #include "GL/glext.h"
 
 #define MRPG_GL_VERSION 21

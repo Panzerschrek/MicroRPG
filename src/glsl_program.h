@@ -13,7 +13,7 @@ class GLSLProgram
 
 	void Bind();
 
-	void UniformI	( unsigned int uniform_id, int i );
+	void UniformInt	( unsigned int uniform_id, int i );
 	void UniformMat4( unsigned int uniform_id, float* mat );
 	void UniformVec3( unsigned int uniform_id, float* v );
 	void UniformFloat(unsigned int uniform_id, float f );

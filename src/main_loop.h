@@ -27,7 +27,7 @@ private:
 	Renderer* renderer;
 	Level* level;
 
-#ifdef MRPG_OS_WIN32
+#ifdef MRPG_OS_WINDOWS
 
 	HWND hwnd;
 	HDC hdc;

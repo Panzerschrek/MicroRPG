@@ -24,7 +24,7 @@ class Text
 
 	Text();
 	~Text(){}
-	void AddText( unsigned int row, unsigned int colomn, unsigned int size, const char* text );
+	void AddText( unsigned int colomn, unsigned int row, unsigned int size, const unsigned char* color, const char* text );
 
 	void Draw();
 

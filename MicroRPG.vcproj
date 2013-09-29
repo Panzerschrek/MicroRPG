@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="MRPG_OS_WIN32"
+				PreprocessorDefinitions="MRPG_OS_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -110,9 +110,10 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="1"
+				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="2"
-				PreprocessorDefinitions="MRPG_OS_WIN32"
+				PreprocessorDefinitions="MRPG_OS_WINDOWS"
 				ExceptionHandling="0"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -133,7 +134,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalOptions="/ALIGN:16 /SECTION:.code,ALIGN=16 "
 				OutputFile="MicroRPG.exe"
+				GenerateManifest="false"
 				GenerateDebugInformation="false"
 				TerminalServerAware="0"
 				OptimizeReferences="2"
@@ -146,6 +149,7 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
+				EmbedManifest="false"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -177,6 +181,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\glsl_program.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\main.cpp"
 				>
 			</File>
@@ -190,6 +198,14 @@
 			</File>
 			<File
 				RelativePath=".\src\renderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\shaders.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\text.cpp"
 				>
 			</File>
 			<File
@@ -208,6 +224,10 @@
 			</File>
 			<File
 				RelativePath=".\src\gl_functions.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\glsl_program.h"
 				>
 			</File>
 			<File
@@ -239,7 +259,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\text.cpp"
+				RelativePath=".\src\shaders.h"
 				>
 			</File>
 			<File

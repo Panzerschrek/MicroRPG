@@ -12,9 +12,10 @@ void Text::CreateTexture()
 {
 	unsigned char* uncompressed_font= new unsigned char[ FONT_BITMAP_WIDTH * FONT_BITMAP_HEIGHT ];
 
+    static unsigned char bits[]= { 128, 64, 32, 16, 8, 4, 2, 1 };
 	for( unsigned int i= 0; i< FONT_BITMAP_WIDTH * FONT_BITMAP_HEIGHT / 8; i++ )
 		for( unsigned int j= 0; j< 8; j++ )
-					uncompressed_font[ i*8 + j ]= ( ( font_data[i] & (1<<(8-j)) ) == 0 ) ? 0 : 255;
+					uncompressed_font[ i*8 + j ]= ( ( font_data[i] & bits[j] ) == 0 ) ? 0 : 255;
 
 
 
@@ -35,43 +36,53 @@ void Text::CreateTexture()
 
 
 
-void Text::AddText( unsigned int row, unsigned int colomn, unsigned int size, const char* text )
+void Text::AddText( unsigned int colomn, unsigned int row, unsigned int size, const unsigned char* color, const char* text )
 {
 	const char* str= text;
 
-	float x, y;
+	float x, x0, y;
 	float dx, dy;
 
-	x=  2.0f * float( colomn * LETTER_WIDTH ) / screen_x - 1.0f;
+	x0= x=  2.0f * float( colomn * LETTER_WIDTH ) / screen_x - 1.0f;
 	y=  -2.0f * float( (row + 1) * LETTER_HEIGHT ) / screen_y + 1.0f;
 
-	dx= 2.0f * float( LETTER_WIDTH ) / screen_x;
-	dy= 2.0f * float( LETTER_HEIGHT ) / screen_y;
+	dx= 2.0f * float( LETTER_WIDTH * size ) / screen_x;
+	dy= 2.0f * float( LETTER_HEIGHT * size ) / screen_y;
 
 
 	TextVertex* v= vertices + vertex_buffer_pos;
 	while( *str != 0 )
 	{
 
-		vertices[0].pos[0]= x;
-		vertices[0].pos[1]= y;
-		vertices[0].tex_coord[0]= *str - 32;
-		vertices[0].tex_coord[1]= 0;
+        if( *str == '\n' )
+        {
+            x= x0;
+            y-=dy;
+            str++;
+            continue;
+        }
+		v[0].pos[0]= x;
+		v[0].pos[1]= y;
+		v[0].tex_coord[0]= *str - 32;
+		v[0].tex_coord[1]= 0;
 
-		vertices[1].pos[0]= x;
-		vertices[1].pos[1]= y + dy;
-		vertices[1].tex_coord[0]= *str - 32;
-		vertices[1].tex_coord[1]= 1;
+		v[1].pos[0]= x;
+		v[1].pos[1]= y + dy;
+		v[1].tex_coord[0]= *str - 32;
+		v[1].tex_coord[1]= 1;
 
-		vertices[2].pos[0]= x + dx;
-		vertices[2].pos[1]= y + dy;
-		vertices[2].tex_coord[0]= *str - 32 + 1;
-		vertices[2].tex_coord[1]= 1;
+		v[2].pos[0]= x + dx;
+		v[2].pos[1]= y + dy;
+		v[2].tex_coord[0]= *str - 32 + 1;
+		v[2].tex_coord[1]= 1;
 
-		vertices[3].pos[0]= x + dx;
-		vertices[3].pos[1]= y;
-		vertices[3].tex_coord[0]= *str - 32 + 1;
-		vertices[3].tex_coord[1]= 0;
+		v[3].pos[0]= x + dx;
+		v[3].pos[1]= y;
+		v[3].tex_coord[0]= *str - 32 + 1;
+		v[3].tex_coord[1]= 0;
+
+        for( unsigned int i= 0; i< 4; i++ )
+             *((int*)v[i].color)= *((int*)color);//copy 4 bytes per one asm command
 
 		x+= dx;
 		v+= 4;
@@ -83,31 +94,25 @@ void Text::AddText( unsigned int row, unsigned int colomn, unsigned int size, co
 void Text::Draw()
 {
 
-	glEnable( GL_TEXTURE_2D );
 	glBindTexture( GL_TEXTURE_2D, font_texture_id );
 
-    glColor3ub( 255, 255, 127 );
+    text_vbo.VertexSubData( vertices, vertex_buffer_pos * sizeof(TextVertex), 0 );
+    text_vbo.VertexAttrib( 0, 2, GL_FLOAT, false, 0 );//vertex coordinates
+    text_vbo.VertexAttrib( 1, 2, GL_UNSIGNED_SHORT, false, sizeof(float)*2 );//texture coordinates
+    text_vbo.VertexAttrib( 2, 4, GL_UNSIGNED_BYTE, true, sizeof(float)*2 + 2*sizeof(short) );//color
+    VertexBuffer::EnableAttribs(3);
 
-	glBegin( GL_QUADS );
+    text_shader.Bind();
+    text_shader.UniformInt( 0, 0 );//texture - unit 0
 
-	glTexCoord2f( 0.0f, 0.0f );
-	glVertex2f( -1.0f, -0.03f );
+    glDrawArrays( GL_QUADS, 0, vertex_buffer_pos );
 
-	glTexCoord2f( 1.0f, 0.0f );
-	glVertex2f( 1.0f, -0.03f );
-
-	glTexCoord2f( 1.0f, 1.0f );
-	glVertex2f( 1.0f, 0.03f );
-
-	glTexCoord2f( 0.0f, 1.0f );
-	glVertex2f( -1.0f, 0.03f );
-
-	glEnd();
-
-    glDisable( GL_TEXTURE_2D );
+    vertex_buffer_pos= 0;
 }
 
-Text::Text()
+
+Text::Text():
+vertex_buffer_pos(0)
 {
 	CreateTexture();
 
@@ -121,5 +126,10 @@ Text::Text()
     text_vbo.VertexData( NULL, MRPG_MAX_TEXT_BUFFER_SIZE * 4 * sizeof(TextVertex),
                                     sizeof(TextVertex) );
 
+
+    text_shader.SetAttribLocation( "v", 0 );
+    text_shader.SetAttribLocation( "tc", 1 );
+    text_shader.SetAttribLocation( "c", 2 );
 	text_shader.Create( text_shader_v, text_shader_f );
+    text_shader.FindUniform( "tex" );
 }

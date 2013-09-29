@@ -9,10 +9,8 @@ int main()
 	MainLoop* main_loop= new MainLoop( level, player );
 
 
-	for( int i= 0; i< 10000; i++ )
-		main_loop->Loop(), usleep(16000);
+	while(1)
+		main_loop->Loop();
 
-
-	printf( "MicroRPG!\n" );
 	return 0;
 }

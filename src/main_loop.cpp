@@ -173,15 +173,11 @@ display_error:
 inline void MainLoop::SetupOGLState()
 {
     //gl state initialisation
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+    //glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL );
     glClearDepth(1.0f);
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glFrustum(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, 10.0f);
+    glClearColor(0.8f, 0.2f, 0.8f, 0.0f);
     glViewport(0, 0, screen_x, screen_y );
-
 }
 
 
@@ -189,7 +185,7 @@ MainLoop::MainLoop( Level* l, Player* p ):
  level(l), player(p)
 {
 
-    screen_x= 768;
+    screen_x= 1024;
     screen_y= 768;
     current_main_loop= this;
 
@@ -262,5 +258,8 @@ void MainLoop::Loop()
 #else
     glXSwapBuffers(dpy, win);
 #endif
+
+
+    usleep(16000);
 
 }

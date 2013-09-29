@@ -3,6 +3,7 @@ extern PFNGLVERTEXATTRIBPOINTERPROC	glVertexAttribPointer;
 extern PFNGLGENBUFFERSPROC			glGenBuffers;
 extern PFNGLBINDBUFFERPROC			glBindBuffer;
 extern PFNGLBUFFERDATAPROC			glBufferData;
+extern PFNGLBUFFERSUBDATAPROC		glBufferSubData;
 
 
 extern PFNGLUNIFORM1IPROC			glUniform1i;
@@ -25,4 +26,7 @@ extern PFNGLSHADERSOURCEPROC			glShaderSource;
 extern PFNGLCOMPILESHADERPROC			glCompileShader;
 extern PFNGLGETSHADERIVPROC			glGetShaderiv;
 extern PFNGLGETSHADERINFOLOGPROC		glGetShaderInfoLog;
+
+extern PFNGLENABLEVERTEXATTRIBARRAYPROC glEnableVertexAttribArray;
+extern PFNGLDISABLEVERTEXATTRIBARRAYPROC glDisableVertexAttribArray;
 void GetGLFunctions();
