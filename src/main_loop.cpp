@@ -89,27 +89,6 @@ inline void MainLoop::InitOGL()
     format= ChoosePixelFormat(hdc, &pfd);
     SetPixelFormat(hdc, format, &pfd);
 
-
-    /*  HGLRC temp_rc= wglCreateContext( hdc );
-      wglMakeCurrent( hdc, temp_rc );
-
-
-      PFNWGLCREATECONTEXTATTRIBSARBPROC wglCreateContextAttribsARB= NULL;
-      wglCreateContextAttribsARB = (PFNWGLCREATECONTEXTATTRIBSARBPROC)wglGetProcAddress("wglCreateContextAttribsARB");
-
-      wglMakeCurrent( NULL, NULL );
-      wglDeleteContext( temp_rc );
-
-      int attribs[] =
-      {
-          WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
-          WGL_CONTEXT_MINOR_VERSION_ARB, 3,
-          WGL_CONTEXT_FLAGS_ARB,        0x0002,
-         0x9126, 0x00000001,
-          0
-      };
-
-      hrc= wglCreateContextAttribsARB( hdc, 0, attribs );*/
     hrc= wglCreateContext( hdc );
     wglMakeCurrent( hdc, hrc );
 
@@ -120,7 +99,6 @@ inline void MainLoop::InitOGL()
     Colormap             cmap;
     XSetWindowAttributes swa;
     GLXContext           cx;
-    // GLboolean				recalcModelView = GL_TRUE;
     int                  dummy;
 
 
@@ -144,13 +122,15 @@ inline void MainLoop::InitOGL()
     cmap = XCreateColormap(dpy, RootWindow(dpy, vi->screen), vi->visual, AllocNone);
     swa.colormap = cmap;
     swa.border_pixel = 0;
+
     swa.event_mask = KeyPressMask    | ExposureMask
                      | ButtonPressMask | StructureNotifyMask;
     win = XCreateWindow(dpy, RootWindow(dpy, vi->screen), 0, 0,
                         screen_x, screen_y, 0, vi->depth, InputOutput, vi->visual,
-                        CWBorderPixel | CWColormap | CWEventMask, &swa);
+                         CWBorderPixel | CWColormap | CWEventMask, &swa);
     XSetStandardProperties(dpy, win, "main", "main", None,
                            NULL, 0, NULL);
+
 
 
     glXMakeCurrent(dpy, win, cx);
@@ -176,7 +156,7 @@ inline void MainLoop::SetupOGLState()
     //glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL );
     glClearDepth(1.0f);
-    glClearColor(0.8f, 0.2f, 0.8f, 0.0f);
+    glClearColor(0.7f, 0.8f, 0.9f, 0.0f);
     glViewport(0, 0, screen_x, screen_y );
 }
 
@@ -239,10 +219,10 @@ void MainLoop::Loop()
             }
             break;
         case ConfigureNotify:
-            glViewport(0, 0, event.xconfigure.width,
-                       event.xconfigure.height);
+        XResizeWindow( dpy, win, screen_x, screen_y );
 
         case Expose:
+        XResizeWindow( dpy, win, screen_x, screen_y );
             break;
 
         }

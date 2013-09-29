@@ -1,10 +1,10 @@
 //text shader
 const char* text_shader_v=
-"attribute vec2 v;"
-"attribute vec2 tc;"
-"attribute vec4 c;"
-"varying vec4 vc;"
-"varying vec2 vtc;"
+"attribute vec2 v;"//in position
+"attribute vec2 tc;"//in texture coord
+"attribute vec4 c;"//in color
+"varying vec4 vc;"//out color
+"varying vec2 vtc;"//out texture coord
 "void main(void)"
 "{"
 "vc=c;"
@@ -23,13 +23,14 @@ const char* text_shader_f=
 
 //microbe shader
 const char* microbe_shader_v=
-"attribute vec3 v;"
-"attribute vec4 c;"
-"varying vec4 vc;"
+"attribute vec3 v;"//in position
+"attribute vec4 c;"//in clolor
+"varying vec4 vc;"//out color
+"uniform mat4 m;"//transformation matrix( scale, translate, rotate )
 "void main(void)"
 "{"
 "vc=c;"
-"gl_Position=vec4(v,1.0);"
+"gl_Position=m*vec4(v,1.0);"
 "}";
 
 const char* microbe_shader_f=

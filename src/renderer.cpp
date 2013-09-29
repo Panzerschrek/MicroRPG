@@ -1,5 +1,10 @@
 #include "renderer.h"
 #include "shaders.h"
+#include "math.h"
+
+#define BODY_DEPTH -0.5f
+#define SHELL_DEPTH -0.4f
+#define PARTS_DEPTH -0.3f
 
 Renderer::Renderer( Level* l, Player* p ):
 level(l), player(p)
@@ -11,6 +16,13 @@ level(l), player(p)
     microbes_shader.SetAttribLocation( "v", 0 );
     microbes_shader.SetAttribLocation( "c", 1 );
     microbes_shader.Create( microbe_shader_v, microbe_shader_f );
+    microbes_shader.FindUniform( "m" );//transform matrix, uniform No 0
+
+
+    int v[4];
+	glGetIntegerv( GL_VIEWPORT, v );
+	screen_x= v[2];
+	screen_y= v[3];
 }
 
 void Renderer::Draw()
@@ -26,7 +38,10 @@ void Renderer::Draw()
 
 
     microbes_shader.Bind();
+
     DrawMicrobeBody(0.0f,0.0f);
+     DrawMicrobeBody(0.5f,0.5f);
+      DrawMicrobeBody(-0.5f,-0.2f);
 
     unsigned char color[]= { 245, 240, 255, 128 };
     text.AddText( 0, 2, 2, color, "MicroRPG - a microbic 64k game" );
@@ -53,16 +68,16 @@ void Renderer::DrawMicrobeBody(float x, float y)
 
         v[0].pos[0]= 0.0f;
         v[0].pos[1]= 0.0f;
-        v[0].pos[2]= 0.0f;
+        v[0].pos[2]= BODY_DEPTH;
         *((int*) v[0].color )= *((int*)color );//4 bytes per 1 command
 
         float a= 0.0f;
         float da= 3.1415926535f * 2.0f / float(segment_count);
         for( unsigned int i= 1; i< segment_count + 1; i++, a+= da )
         {
-            v[i].pos[0]= 0.5f* cos(a);
-            v[i].pos[1]= 0.5f* sin(a);
-            v[i].pos[2]= 0.0f;
+            v[i].pos[0]= cos(a);
+            v[i].pos[1]= sin(a);
+            v[i].pos[2]= BODY_DEPTH;
 
             *((int*) v[i].color )= *((int*)color );//4 bytes per 1 command
             //v[i].color[0]= color[0];v[i].color[1]= color[1];
@@ -78,6 +93,20 @@ void Renderer::DrawMicrobeBody(float x, float y)
         ind[ segment_count * 3 - 1 ]= 1;
     }
 
+
+	float mat[3][16];
+
+	Mat4Identity( mat[0] );//scale matrix
+	mat[0][0]= float( screen_y ) / float( screen_x ) * 0.125f;
+	mat[0][5]= 0.125f;
+
+	Mat4Identity( mat[1] );//translate matirx
+	mat[1][12]= -x;
+	mat[1][13]= -y;
+	Mat4Mul( mat[0], mat[1], mat[2] );
+
+
+    microbes_shader.UniformMat4( 0, mat[2] );
 
     microbes_vbo.VertexSubData( v, (segment_count + 1)*sizeof(MicrobeVertex), 0 );
     microbes_vbo.IndexSubData( ind, segment_count*3 * sizeof(short), 0 );

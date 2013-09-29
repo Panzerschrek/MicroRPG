@@ -10,8 +10,8 @@ for( i= 0; i< count; i++ )
          glEnableVertexAttribArray(i);
     for( i= count; i<8; i++ )
          glDisableVertexAttribArray(i);
-           
-    
+
+
 }
 
 VertexBuffer::VertexBuffer()
@@ -33,7 +33,7 @@ void VertexBuffer::VertexData( void* data, unsigned int data_size, unsigned int 
 
 void VertexBuffer::IndexData( void* data, unsigned int data_size )
 {
-	if( index_vbo == 0xfffffffff )
+	if( index_vbo == 0xffffffff )
 		glGenBuffers( 1, &index_vbo );
 
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, index_vbo );

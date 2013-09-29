@@ -36,6 +36,8 @@ class Renderer
 
 	Text text;
 
+	unsigned int screen_x, screen_y;
+
 
 };
 

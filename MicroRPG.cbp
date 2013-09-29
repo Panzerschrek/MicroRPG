@@ -30,9 +30,19 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="Debug_Panzerschrek_only">
+				<Option platforms="Unix;" />
+				<Option output="/home/panzerschrek/Рабочий стол/MicroRPGTmp/MicroRPG_d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
+			<Add option="-Wextra" />
 			<Add option="-DMRPG_OS_GNU_LINUX" />
 		</Compiler>
 		<Linker>
