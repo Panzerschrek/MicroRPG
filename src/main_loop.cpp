@@ -222,7 +222,6 @@ void MainLoop::Loop()
         XResizeWindow( dpy, win, screen_x, screen_y );
 
         case Expose:
-        XResizeWindow( dpy, win, screen_x, screen_y );
             break;
 
         }
