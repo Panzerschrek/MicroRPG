@@ -1,15 +1,16 @@
 # depslib dependency file v1.0
-1380274941 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main.cpp
+1380385206 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main.cpp
 	"micro_rpg.h"
 	"main_loop.h"
 	"renderer.h"
 
-1380353558 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
+1380372247 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/micro_rpg.h
 	<windows.h>
 	<unistd.h>
-	<stdlib.h>
 	<stdio.h>
+	<stdlib.h>
 	<string.h>
+	<math.h>
 	<GL/gl.h>
 	"GL/wglext.h"
 	<GL/glx.h>
@@ -17,11 +18,11 @@
 	<X11/keysym.h>
 	"GL/glext.h"
 
-1380352307 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
+1380385216 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.cpp
 	"main_loop.h"
 	"gl_functions.h"
 
-1380274952 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.h
+1380357489 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/main_loop.h
 	"micro_rpg.h"
 	"renderer.h"
 	"player.h"
@@ -50,21 +51,24 @@
 
 1380186941 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/game_constants.h
 
-1380274861 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.h
+1380373730 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.h
 	"player.h"
 	"level.h"
 	"micro_rpg.h"
 	"text.h"
+	"vertex_buffer.h"
+	"glsl_program.h"
 
 1380253167 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/player.h
 	"microbe.h"
 
 1380253177 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/level.h
 
-1380338011 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.cpp
+1380430580 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/renderer.cpp
 	"renderer.h"
+	"shaders.h"
 
-1380356100 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.cpp
+1380377411 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.cpp
 	"../other/font_data.c"
 	"text.h"
 
@@ -72,34 +76,34 @@
 
 1380279788 /media/9818A8C818A8A6AA/lnk/MicroRPG/other/font_data.c
 
-1380356204 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.h
+1380362074 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/text.h
 	"micro_rpg.h"
 	"vertex_buffer.h"
 	"glsl_program.h"
 	"shaders.h"
 
-1380356647 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/gl_functions.cpp
+1380360428 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/gl_functions.cpp
 	"gl_functions.h"
 
-1380339734 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/vertex_buffer.cpp
+1380384097 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/vertex_buffer.cpp
 	"vertex_buffer.h"
 
-1380290979 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/vertex_buffer.h
+1380376827 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/vertex_buffer.h
 	"micro_rpg.h"
 	"gl_functions.h"
 
-1380356583 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/gl_functions.h
+1380360382 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/gl_functions.h
 	"micro_rpg.h"
 
-1380356662 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/glsl_program.cpp
+1380359215 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/glsl_program.cpp
 	"glsl_program.h"
 	"gl_functions.h"
 
-1380355640 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/glsl_program.h
+1380359199 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/glsl_program.h
 	"micro_rpg.h"
 	"gl_functions.h"
 
-1380356146 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/shaders.h
+1380373830 /media/9818A8C818A8A6AA/lnk/MicroRPG/src/shaders.h
 
-1380356080 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/shaders.cpp
+1380373913 source:/media/9818A8C818A8A6AA/lnk/MicroRPG/src/shaders.cpp
 

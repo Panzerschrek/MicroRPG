@@ -23,8 +23,8 @@ void Renderer::Draw()
     microbes_vbo.VertexAttrib( 0, 3, GL_FLOAT, false, 0 );//vertex coordinates
     microbes_vbo.VertexAttrib( 1, 4, GL_UNSIGNED_BYTE, true, sizeof(float)*3 );//color
     VertexBuffer::EnableAttribs(2);
-    
- 
+
+
     microbes_shader.Bind();
     DrawMicrobeBody(0.0f,0.0f);
 
@@ -48,9 +48,9 @@ void Renderer::DrawMicrobeBody(float x, float y)
         //index count = n*3+
         v =new  MicrobeVertex[ segment_count + 1 ];
         ind= new unsigned short[ segment_count * 3 ];
-        
+
         static const unsigned char color[]= { 255, 200,190, 0 };
-        
+
         v[0].pos[0]= 0.0f;
         v[0].pos[1]= 0.0f;
         v[0].pos[2]= 0.0f;
@@ -58,7 +58,7 @@ void Renderer::DrawMicrobeBody(float x, float y)
 
         float a= 0.0f;
         float da= 3.1415926535f * 2.0f / float(segment_count);
-        for( int i= 1; i< segment_count + 1; i++, a+= da )
+        for( unsigned int i= 1; i< segment_count + 1; i++, a+= da )
         {
             v[i].pos[0]= 0.5f* cos(a);
             v[i].pos[1]= 0.5f* sin(a);
@@ -69,7 +69,7 @@ void Renderer::DrawMicrobeBody(float x, float y)
             //v[i].color[2]= color[2];v[i].color[3]= color[3];
         }
 
-        for( int i= 1, j=0; i< segment_count+1; i++, j+=3 )
+        for( unsigned int i= 1, j=0; i< segment_count+1; i++, j+=3 )
         {
             ind[j]= 0;
             ind[j + 1]= i;
@@ -81,8 +81,8 @@ void Renderer::DrawMicrobeBody(float x, float y)
 
     microbes_vbo.VertexSubData( v, (segment_count + 1)*sizeof(MicrobeVertex), 0 );
     microbes_vbo.IndexSubData( ind, segment_count*3 * sizeof(short), 0 );
-   
+
 
     glDrawElements( GL_TRIANGLES, segment_count*3, GL_UNSIGNED_SHORT, NULL );
-    
+
 }
