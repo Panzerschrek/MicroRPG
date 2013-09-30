@@ -1,17 +1,24 @@
 #include "renderer.h"
 #include "shaders.h"
 #include "math.h"
+#include "background.h"
 
-#define BODY_DEPTH -0.5f
-#define SHELL_DEPTH -0.4f
-#define PARTS_DEPTH -0.3f
+#define BODY_DEPTH 0.9f
+#define SHELL_DEPTH 0.8f
+#define PARTS_DEPTH 0.7f
 
 Renderer::Renderer( Level* l, Player* p ):
 level(l), player(p)
 {
+
+	int v[4];
+	glGetIntegerv( GL_VIEWPORT, v );
+	screen_x= v[2];
+	screen_y= v[3];
+
+
     microbes_vbo.VertexData( NULL, sizeof(MicrobeVertex) * 1024, sizeof(MicrobeVertex) );
     microbes_vbo.IndexData( NULL, 1024 * sizeof(short) );
-
 
     microbes_shader.SetAttribLocation( "v", 0 );
     microbes_shader.SetAttribLocation( "c", 1 );
@@ -19,16 +26,50 @@ level(l), player(p)
     microbes_shader.FindUniform( "m" );//transform matrix, uniform No 0
 
 
-    int v[4];
-	glGetIntegerv( GL_VIEWPORT, v );
-	screen_x= v[2];
-	screen_y= v[3];
+	glGenTextures( 1, &background_texture );
+	glBindTexture( GL_TEXTURE_2D, background_texture );
+
+	unsigned char* bg_data= GenBackground( screen_x, screen_y );
+
+	glTexParameteri( GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE );
+	glTexImage2D( GL_TEXTURE_2D, 0, 1,
+					 screen_x, screen_y, 0,
+					 	 GL_RED,  GL_UNSIGNED_BYTE, bg_data );
+
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
+
+
+}
+
+void Renderer::DrawBackground()
+{
+	glBindTexture( GL_TEXTURE_2D, background_texture );
+	glEnable( GL_TEXTURE_2D );
+	glUseProgram(0);
+
+	glColor3f( 0.7f, 0.8f, 0.9f );
+
+	glBegin( GL_QUADS );
+	glTexCoord2f( 0.0f, 0.0f );
+	glVertex2f( -1.0f, -1.0f );
+
+	glTexCoord2f( 1.0f, 0.0f );
+	glVertex2f( 1.0f, -1.0f );
+
+	glTexCoord2f( 1.0f, 1.0f );
+	glVertex2f( 1.0f, 1.0f );
+
+	glTexCoord2f( 0.0f, 1.0f );
+	glVertex2f( -1.0f, 1.0f );
+	glEnd();
 }
 
 void Renderer::Draw()
 {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    DrawBackground();
 
     microbes_vbo.Bind();
 
@@ -39,9 +80,15 @@ void Renderer::Draw()
 
     microbes_shader.Bind();
 
-    DrawMicrobeBody(0.0f,0.0f);
-     DrawMicrobeBody(0.5f,0.5f);
-      DrawMicrobeBody(-0.5f,-0.2f);
+	//temp code
+	srand(0);
+	for( int i= 0; i< 10; i++ )
+	{
+		float x, y;
+		x= 2.0f*float(rand())/float(RAND_MAX) - 1.0f;
+		y= 2.0f*float(rand())/float(RAND_MAX) - 1.0f;
+    	DrawMicrobeBody(x,y);
+	}
 
     unsigned char color[]= { 245, 240, 255, 128 };
     text.AddText( 0, 2, 2, color, "MicroRPG - a microbic 64k game" );

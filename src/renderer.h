@@ -28,6 +28,7 @@ class Renderer
 	private:
 
     void DrawMicrobeBody( float x, float y );
+    void DrawBackground();
 
     VertexBuffer microbes_vbo;
     GLSLProgram microbes_shader;
@@ -35,6 +36,7 @@ class Renderer
 	Level* level;
 
 	Text text;
+	GLuint background_texture;
 
 	unsigned int screen_x, screen_y;
 

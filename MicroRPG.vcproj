@@ -89,6 +89,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			UseOfMFC="0"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
@@ -134,7 +135,6 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalOptions="/ALIGN:16 /SECTION:.code,ALIGN=16 "
 				OutputFile="MicroRPG.exe"
 				GenerateManifest="false"
 				GenerateDebugInformation="false"
@@ -177,6 +177,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\src\background.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\gl_functions.cpp"
 				>
 			</File>
@@ -190,6 +194,10 @@
 			</File>
 			<File
 				RelativePath=".\src\main_loop.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\math.cpp"
 				>
 			</File>
 			<File
@@ -219,6 +227,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\src\background.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\game_constants.h"
 				>
 			</File>
@@ -240,6 +252,10 @@
 			</File>
 			<File
 				RelativePath=".\src\main_loop.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\math.h"
 				>
 			</File>
 			<File

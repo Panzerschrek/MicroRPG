@@ -27,6 +27,8 @@ private:
 	Renderer* renderer;
 	Level* level;
 
+    bool keys[256];
+
 #ifdef MRPG_OS_WINDOWS
 
 	HWND hwnd;

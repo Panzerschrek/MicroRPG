@@ -14,6 +14,21 @@ LRESULT CALLBACK MainLoop::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
     case WM_CLOSE:
         exit(0);
 
+        case WM_KEYUP:
+            if( wParam < 256 )
+                current_main_loop->keys[ wParam ]= false;
+        break;
+
+        case WM_KEYDOWN:
+            if( wParam < 256 )
+                current_main_loop->keys[ wParam ]= true;
+#ifdef MRPG_DEBUG
+            printf( "key: %d\n", wParam );
+#endif
+        break;
+
+
+        default:
         break;
     }
 
@@ -168,6 +183,9 @@ MainLoop::MainLoop( Level* l, Player* p ):
     screen_x= 1024;
     screen_y= 768;
     current_main_loop= this;
+
+    for( int i= 0; i< 256; i++ )
+        keys[i]= false;
 
     InitOGL();
     GetGLFunctions();

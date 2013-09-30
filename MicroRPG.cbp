@@ -49,6 +49,8 @@
 			<Add library="X11" />
 			<Add library="GL" />
 		</Linker>
+		<Unit filename="src/background.cpp" />
+		<Unit filename="src/background.h" />
 		<Unit filename="src/game_constants.h" />
 		<Unit filename="src/gl_functions.cpp" />
 		<Unit filename="src/gl_functions.h" />
