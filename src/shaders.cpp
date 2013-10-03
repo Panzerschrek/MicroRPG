@@ -18,7 +18,8 @@ const char* text_shader_f=
 "uniform sampler2D tex;"
 "void main(void)"
 "{"
-"gl_FragColor=vec4(vc.xyz*texture2D(tex,vtc).x,vc.a);"
+"float c=texture2D(tex,vtc).x;"
+"gl_FragColor=vec4(vc.xyz*c,max(vc.a,c));"
 "}";
 
 //microbe shader

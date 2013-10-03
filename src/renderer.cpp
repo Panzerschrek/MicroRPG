@@ -7,6 +7,15 @@
 #define SHELL_DEPTH 0.8f
 #define PARTS_DEPTH 0.7f
 
+
+void Mesh::Draw()
+{
+    if( index_count == 0 )//non indexed geometry
+        glDrawArrays( primitive_type, 0, vertex_count );
+    else
+        glDrawElements( primitive_type, index_count, GL_UNSIGNED_SHORT, NULL );
+}
+
 Renderer::Renderer( Level* l, Player* p ):
 level(l), player(p)
 {
@@ -82,15 +91,16 @@ void Renderer::Draw()
 
 	//temp code
 	srand(0);
-	for( int i= 0; i< 10; i++ )
+	for( int i= 0; i< 50; i++ )
 	{
 		float x, y;
 		x= 2.0f*float(rand())/float(RAND_MAX) - 1.0f;
 		y= 2.0f*float(rand())/float(RAND_MAX) - 1.0f;
     	DrawMicrobeBody(x,y);
+        DrawCellShell(x,y);
 	}
 
-    unsigned char color[]= { 245, 240, 255, 128 };
+    unsigned char color[]= { 255, 255, 255, 32 };
     text.AddText( 0, 2, 2, color, "MicroRPG - a microbic 64k game" );
     text.AddText( 0, 3, 1, color, "By Panzerschrek && Mmaulwurff" );
     text.Draw();
@@ -101,7 +111,7 @@ void Renderer::DrawMicrobeBody(float x, float y)
     static unsigned short* ind= NULL;
     static MicrobeVertex* v= NULL;
 
-    const unsigned int segment_count= 36;
+    const unsigned int segment_count= 16;
 
     //generate microbe body mesh
     if( ind == NULL )
@@ -160,5 +170,75 @@ void Renderer::DrawMicrobeBody(float x, float y)
 
 
     glDrawElements( GL_TRIANGLES, segment_count*3, GL_UNSIGNED_SHORT, NULL );
+
+}
+
+
+
+void Renderer::DrawCellShell(float x, float y)
+{
+    static unsigned short* ind= NULL;
+    static MicrobeVertex* v= NULL;
+
+    const unsigned int segment_count= 16;
+
+    //generate shell mesh
+    if( ind == NULL )
+    {
+        //vertex count= n * 2
+        //quads index count = n * 4
+        v =new  MicrobeVertex[ segment_count *2 ];
+        ind= new unsigned short[ segment_count * 4 ];
+
+        static const unsigned char color[]= { 255/2, 200/2,190/2, 0 };
+
+        float a= 0.0f;
+        float da= 3.1415926535f * 2.0f / float(segment_count);
+        for( unsigned int i= 0; i< segment_count * 2; i+=2, a+= da )
+        {
+            v[i].pos[0]= cos(a);
+            v[i].pos[1]= sin(a);
+            v[i+1].pos[0]= v[i].pos[0] * 1.05f;
+            v[i+1].pos[1]= v[i].pos[1] * 1.05f;
+            v[i].pos[2]= v[i+1].pos[2]= SHELL_DEPTH;
+
+            *((int*) v[i].color )= *((int*)color );//4 bytes per 1 command
+            *((int*) v[i+1].color )= *((int*)color );
+            //v[i].color[0]= color[0];v[i].color[1]= color[1];
+            //v[i].color[2]= color[2];v[i].color[3]= color[3];
+        }
+
+        for( unsigned int i= 0, j=0; i< segment_count * 4; i+=4, j+=2 )
+        {
+            ind[ i ]= j;
+            ind[ i + 1 ] = j + 1; 
+            ind[ i + 2 ] = j + 3;
+            ind[ i + 3 ] = j + 2;
+        }
+        ind[ segment_count * 4 - 2 ]= 1;
+        ind [ segment_count * 4 - 1 ]= 0;
+       
+    }
+
+
+	float mat[3][16];
+
+	Mat4Identity( mat[0] );//scale matrix
+	mat[0][0]= float( screen_y ) / float( screen_x ) * 0.125f;
+	mat[0][5]= 0.125f;
+
+	Mat4Identity( mat[1] );//translate matirx
+	mat[1][12]= -x;
+	mat[1][13]= -y;
+	Mat4Mul( mat[0], mat[1], mat[2] );
+
+
+    microbes_shader.UniformMat4( 0, mat[2] );
+
+    microbes_vbo.VertexSubData( v, segment_count * 2 * sizeof(MicrobeVertex), 0 );
+    microbes_vbo.IndexSubData( ind, segment_count * 4 * sizeof(short), 0 );
+
+
+    glDrawElements( GL_QUADS, segment_count * 4, GL_UNSIGNED_SHORT, NULL );
 
 }

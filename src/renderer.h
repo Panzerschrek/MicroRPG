@@ -17,6 +17,19 @@ struct MicrobeVertex
 };
 #pragma pack(pop)
 
+
+class Mesh
+{
+public:
+
+    MicrobeVertex* vertices;
+    unsigned short* indeces;
+    unsigned int vertex_count, index_count;
+    GLenum primitive_type;//quads/triangles/etc
+
+    void Draw();
+};
+
 class Renderer
 {
 	public:
@@ -28,6 +41,7 @@ class Renderer
 	private:
 
     void DrawMicrobeBody( float x, float y );
+    void DrawCellShell( float x, float y );
     void DrawBackground();
 
     VertexBuffer microbes_vbo;

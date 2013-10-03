@@ -173,6 +173,7 @@ inline void MainLoop::SetupOGLState()
     glClearDepth(1.0f);
     glClearColor(0.7f, 0.8f, 0.9f, 0.0f);
     glViewport(0, 0, screen_x, screen_y );
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 }
 
 

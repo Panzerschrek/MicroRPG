@@ -38,9 +38,4 @@ inline void VertexBuffer::Bind()
 		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, index_vbo );
 }
 
-inline void VertexBuffer::VertexAttrib( int attrib, unsigned int components, GLenum type, bool normalized, unsigned int shift )
-{
-    glVertexAttribPointer( attrib, components, type, normalized, vertex_size, (void*) shift );
-}
-
 #endif//VERTEX_BUFFER_H

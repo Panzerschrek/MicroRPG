@@ -14,6 +14,12 @@ for( i= 0; i< count; i++ )
 
 }
 
+void VertexBuffer::VertexAttrib( int attrib, unsigned int components, GLenum type, bool normalized, unsigned int shift )
+{
+    glVertexAttribPointer( attrib, components, type, normalized, vertex_size, (void*) shift );
+}
+
+
 VertexBuffer::VertexBuffer()
 {
 	index_vbo= vertex_vbo= 0xffffffff;

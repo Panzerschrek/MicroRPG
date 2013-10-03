@@ -105,8 +105,9 @@ void Text::Draw()
     text_shader.Bind();
     text_shader.UniformInt( 0, 0 );//texture - unit 0
 
+	glEnable( GL_BLEND );
     glDrawArrays( GL_QUADS, 0, vertex_buffer_pos );
-
+	glDisable( GL_BLEND );
     vertex_buffer_pos= 0;
 }
 
