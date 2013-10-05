@@ -9,11 +9,10 @@ public:
     float X();
     float Y();
     float Dir();
-    Microbe();
+    Microbe(float x, float y);
     ~Microbe();
 
 private:
-
     float x, y;
     float direction;
 
