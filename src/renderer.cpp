@@ -1,3 +1,5 @@
+#include <time.h>
+
 #include "renderer.h"
 #include "shaders.h"
 #include "math.h"
@@ -5,8 +7,8 @@
 #include "microbe.h"
 
 #define BODY_DEPTH 0.9f
-#define SHELL_DEPTH 0.8f
-#define PARTS_DEPTH 0.7f
+#define SHELL_DEPTH 0.7f
+#define PARTS_DEPTH 0.8f
 
 
 
@@ -130,6 +132,66 @@ void GenCellShell( Mesh* m )
 }
 
 
+void GenFlagellum( Mesh* m )
+{
+	const unsigned int segment_count= 16;
+
+
+	 MicrobeVertex* v;
+    unsigned short* ind;
+
+	if( m->vertices != NULL )
+	{
+		v= m->vertices;
+		ind= m->indeces;
+	}
+	else
+	{
+		v= new  MicrobeVertex[ segment_count *2 + 2 ];
+		ind=  new unsigned short[ segment_count * 4 ];
+	}
+
+	static const unsigned char color[]= { 32, 32,32, 0 };
+
+    float a= 2.0f * 3.1415926535f * float( clock() ) / float( CLOCKS_PER_SEC );
+    float da= 6.0f * 3.1415926535f / float( segment_count );
+    float y= 1.0f;
+    float dy= 2.0f / float( segment_count );
+    float width= 0.15f;
+    float d_w= width / float( segment_count );
+    float amplitude= 0.0625f;
+    for( unsigned int i= 0; i< segment_count *2 + 2; i+=2, a+= da, y+= dy, width-= d_w )
+    {
+    	v[i].pos[0]= amplitude * sin(a) -0.5f * width;
+    	v[i+1].pos[0]= v[i].pos[0] + width;
+
+    	v[i].pos[1]= v[i+1].pos[1]= y;
+
+    	v[i].pos[2]= v[i+1].pos[2]= PARTS_DEPTH;
+
+    	*((int*) v[i].color )= *((int*)color );//4 bytes per 1 command
+       *((int*) v[i+1].color )= *((int*)color );
+    }
+
+     for( unsigned int i= 0, j=0; i< segment_count * 4; i+=4, j+=2 )
+    {
+        ind[ i ]= j;
+        ind[ i + 1 ] = j + 1;
+        ind[ i + 2 ] = j + 3;
+        ind[ i + 3 ] = j + 2;
+    }
+
+	if( m->vertices == NULL )
+	{
+    	m->indeces= ind;
+    	m->vertices= v;
+	}
+    m->primitive_type= GL_QUADS;
+    m->vertex_count= segment_count * 2 + 2;
+    m->index_count= segment_count * 4;
+
+
+}
 
 
 
@@ -177,6 +239,7 @@ Renderer::Renderer( Level* l, Player* p ):
     GenMicrobeBody( &part_meshes[ PART_ROUND_BODY ] );
     GenCellShell( &part_meshes[ PART_DEFAULT_SHELL ] );
     GenDefaultNucleus( &part_meshes[ PART_DEFAULT_NUCLEUS ] );
+    GenFlagellum( &part_meshes[ PART_FLAGELLUM ] );
 
 
 }
@@ -191,16 +254,16 @@ void Renderer::DrawBackground()
 
     glBegin( GL_QUADS );
     glTexCoord2f( 0.0f, 0.0f );
-    glVertex2f( -1.0f, -1.0f );
+    glVertex3f( -1.0f, -1.0f, 1.0f );
 
     glTexCoord2f( 1.0f, 0.0f );
-    glVertex2f( 1.0f, -1.0f );
+    glVertex3f( 1.0f, -1.0f, 1.0f );
 
     glTexCoord2f( 1.0f, 1.0f );
-    glVertex2f( 1.0f, 1.0f );
+    glVertex3f( 1.0f, 1.0f, 1.0f );
 
     glTexCoord2f( 0.0f, 1.0f );
-    glVertex2f( -1.0f, 1.0f );
+    glVertex3f( -1.0f, 1.0f, 1.0f );
     glEnd();
 }
 
@@ -230,8 +293,8 @@ void Renderer::Draw()
         float mat[3][16];
 
         Mat4Identity( mat[0] );//scale matrix
-        mat[0][0]= float( screen_y ) / float( screen_x ) * 0.125f;
-        mat[0][5]= 0.125f;
+        mat[0][0]= float( screen_y ) / float( screen_x ) * 0.25f;
+        mat[0][5]= 0.25f;
 
         Mat4Identity( mat[1] );//translate matirx
         mat[1][12]= -microbe->X();
@@ -255,6 +318,15 @@ void Renderer::Draw()
 		microbes_vbo.IndexSubData( part_meshes[ PART_DEFAULT_SHELL ].indeces,
 									part_meshes[ PART_DEFAULT_SHELL ].index_count * sizeof(short), 0 );
         part_meshes[ PART_DEFAULT_SHELL ].Draw();
+
+
+
+		GenFlagellum( &part_meshes[ PART_FLAGELLUM ] );
+		microbes_vbo.VertexSubData( part_meshes[ PART_FLAGELLUM ].vertices,
+                                    part_meshes[ PART_FLAGELLUM ].vertex_count * sizeof(MicrobeVertex), 0 );
+		microbes_vbo.IndexSubData( part_meshes[ PART_FLAGELLUM ].indeces,
+									part_meshes[ PART_FLAGELLUM ].index_count * sizeof(short), 0 );
+        part_meshes[ PART_FLAGELLUM ].Draw();
     }
 
 

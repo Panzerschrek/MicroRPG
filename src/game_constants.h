@@ -24,6 +24,7 @@ every part ( and body too ) mast have id
 #define PART_ROUND_BODY 0
 #define PART_DEFAULT_SHELL 1
 #define PART_DEFAULT_NUCLEUS 2
+#define PART_FLAGELLUM 3
 
 
 

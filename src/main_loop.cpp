@@ -168,7 +168,7 @@ display_error:
 inline void MainLoop::SetupOGLState()
 {
     //gl state initialisation
-    //glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL );
     glClearDepth(1.0f);
     glClearColor(0.7f, 0.8f, 0.9f, 0.0f);
@@ -258,6 +258,6 @@ void MainLoop::Loop()
 #endif
 
 
-    usleep(16000);
+    usleep(1000);//1 ms
 
 }
