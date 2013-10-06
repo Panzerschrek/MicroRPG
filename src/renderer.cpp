@@ -2,6 +2,7 @@
 #include "shaders.h"
 #include "math.h"
 #include "background.h"
+#include "microbe.h"
 
 #define BODY_DEPTH 0.9f
 #define SHELL_DEPTH 0.8f
@@ -175,7 +176,7 @@ Renderer::Renderer( Level* l, Player* p ):
 
     GenMicrobeBody( &part_meshes[ PART_ROUND_BODY ] );
     GenCellShell( &part_meshes[ PART_DEFAULT_SHELL ] );
-     GenDefaultNucleus( &part_meshes[ PART_DEFAULT_NUCLEUS ] );
+    GenDefaultNucleus( &part_meshes[ PART_DEFAULT_NUCLEUS ] );
 
 
 }
@@ -221,37 +222,40 @@ void Renderer::Draw()
     //temp code
 
 
-	float mat[3][16];
 
-    Mat4Identity( mat[0] );//scale matrix
-    mat[0][0]= float( screen_y ) / float( screen_x ) * 0.125f;
-    mat[0][5]= 0.125f;
+    for (int i=0; i<level->getLastMicrobeIndex(); ++i)
+    {
+        Microbe* microbe = level->getMicrobe(i);
 
-    Mat4Identity( mat[1] );//translate matirx
-    mat[1][12]= -0.0f;
-    mat[1][13]= -0.0f;
-    Mat4Mul( mat[0], mat[1], mat[2] );
+        float mat[3][16];
 
+        Mat4Identity( mat[0] );//scale matrix
+        mat[0][0]= float( screen_y ) / float( screen_x ) * 0.125f;
+        mat[0][5]= 0.125f;
 
-    microbes_shader.UniformMat4( 0, mat[2] );
-
-    microbes_vbo.VertexSubData( part_meshes[PART_ROUND_BODY].vertices,
-							 part_meshes[PART_ROUND_BODY].vertex_count *sizeof(MicrobeVertex), 0 );
-    part_meshes[PART_ROUND_BODY].Draw();
-
-    microbes_vbo.VertexSubData( part_meshes[PART_DEFAULT_NUCLEUS].vertices,
-							 part_meshes[PART_DEFAULT_NUCLEUS].vertex_count *sizeof(MicrobeVertex), 0 );
-    part_meshes[PART_DEFAULT_NUCLEUS].Draw();
+        Mat4Identity( mat[1] );//translate matirx
+        mat[1][12]= -microbe->X();
+        mat[1][13]= -microbe->Y();
+        Mat4Mul( mat[0], mat[1], mat[2] );
 
 
-     microbes_vbo.VertexSubData( part_meshes[PART_DEFAULT_SHELL].vertices,
-							 part_meshes[PART_DEFAULT_SHELL].vertex_count *sizeof(MicrobeVertex), 0 );
-	microbes_vbo.IndexSubData( part_meshes[PART_DEFAULT_SHELL].indeces,
-								part_meshes[PART_DEFAULT_SHELL].index_count * sizeof(short), 0);
-    part_meshes[PART_DEFAULT_SHELL].Draw();
+        microbes_shader.UniformMat4( 0, mat[2] );
+
+        microbes_vbo.VertexSubData( part_meshes[ PART_ROUND_BODY  ].vertices,
+                                    part_meshes[ PART_ROUND_BODY  ].vertex_count * sizeof(MicrobeVertex), 0 );
+        part_meshes[ PART_ROUND_BODY ].Draw();
 
 
+         microbes_vbo.VertexSubData( part_meshes[ PART_DEFAULT_NUCLEUS  ].vertices,
+                                    part_meshes[ PART_DEFAULT_NUCLEUS  ].vertex_count * sizeof(MicrobeVertex), 0 );
+        part_meshes[ PART_DEFAULT_NUCLEUS ].Draw();
 
+         microbes_vbo.VertexSubData( part_meshes[ PART_DEFAULT_SHELL  ].vertices,
+                                    part_meshes[ PART_DEFAULT_SHELL  ].vertex_count * sizeof(MicrobeVertex), 0 );
+		microbes_vbo.IndexSubData( part_meshes[ PART_DEFAULT_SHELL ].indeces,
+									part_meshes[ PART_DEFAULT_SHELL ].index_count * sizeof(short), 0 );
+        part_meshes[ PART_DEFAULT_SHELL ].Draw();
+    }
 
 
     unsigned char color[]= { 255, 255, 255, 32 };
@@ -259,5 +263,3 @@ void Renderer::Draw()
     text.AddText( 0, 3, 1, color, "By Panzerschrek && Mmaulwurff" );
     text.Draw();
 }
-
-

@@ -40,7 +40,7 @@ class Renderer
 
 	private:
 
-    void DrawMicrobeBody( float x, float y );
+   // void DrawMicrobeBody( float x, float y );
     void DrawBackground();
 
     VertexBuffer microbes_vbo;

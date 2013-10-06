@@ -3,11 +3,9 @@
 #include "renderer.h"
 int main()
 {
-
-	Player* player= new Player();
-	Level* level= new Level();
-	MainLoop* main_loop= new MainLoop( level, player );
-
+    Level* level= new Level();
+    Player* player= new Player(level);
+    MainLoop* main_loop= new MainLoop( level, player );
 
 	while(1)
 		main_loop->Loop();
