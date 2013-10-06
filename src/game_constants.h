@@ -26,6 +26,8 @@ every part ( and body too ) mast have id
 #define PART_DEFAULT_NUCLEUS 2
 #define PART_FLAGELLUM 3
 
+#define PART_COUNT 4//total part count in game. Every part must havegeneration function
+
 
 
 //genes codes

@@ -30,6 +30,7 @@ public:
     void Draw();
 };
 
+
 class Renderer
 {
 	public:

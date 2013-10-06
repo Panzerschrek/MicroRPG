@@ -17,7 +17,6 @@ inline void usleep(int n ) { Sleep(n/1000); }
 
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
 
 
