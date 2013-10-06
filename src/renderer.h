@@ -41,7 +41,6 @@ class Renderer
 	private:
 
     void DrawMicrobeBody( float x, float y );
-    void DrawCellShell( float x, float y );
     void DrawBackground();
 
     VertexBuffer microbes_vbo;
@@ -53,6 +52,8 @@ class Renderer
 	GLuint background_texture;
 
 	unsigned int screen_x, screen_y;
+
+	Mesh part_meshes[64];
 
 
 };
