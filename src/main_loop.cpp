@@ -5,6 +5,9 @@ MainLoop* MainLoop::current_main_loop= NULL;
 
 
 #ifdef MRPG_OS_WINDOWS
+
+
+#define KEY(x) (65 + 'A' - x)
 LRESULT CALLBACK MainLoop::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if( uMsg == WM_CLOSE )
@@ -14,21 +17,31 @@ LRESULT CALLBACK MainLoop::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
     case WM_CLOSE:
         exit(0);
 
-        case WM_KEYUP:
-            if( wParam < 256 )
-                current_main_loop->keys[ wParam ]= false;
+    case WM_KEYUP:
+        if( wParam < 256 )
+            current_main_loop->keys[ wParam ]= false;
         break;
 
-        case WM_KEYDOWN:
-            if( wParam < 256 )
-                current_main_loop->keys[ wParam ]= true;
+    case WM_KEYDOWN:
+    {
+        if( wParam < 256 )
+            current_main_loop->keys[ wParam ]= true;
+
+		switch( wParam )
+		{
+			case KEY('Q'):
+			exit(0);
+			default:
+			break;
+		}
+    }//key down
 #ifdef MRPG_DEBUG
-            printf( "key: %d\n", wParam );
+        printf( "key: %d\n", wParam );
 #endif
         break;
 
 
-        default:
+    default:
         break;
     }
 
@@ -142,7 +155,7 @@ inline void MainLoop::InitOGL()
                      | ButtonPressMask | StructureNotifyMask;
     win = XCreateWindow(dpy, RootWindow(dpy, vi->screen), 0, 0,
                         screen_x, screen_y, 0, vi->depth, InputOutput, vi->visual,
-                         CWBorderPixel | CWColormap | CWEventMask, &swa);
+                        CWBorderPixel | CWColormap | CWEventMask, &swa);
     XSetStandardProperties(dpy, win, "main", "main", None,
                            NULL, 0, NULL);
 
@@ -153,11 +166,11 @@ inline void MainLoop::InitOGL()
 
 #endif
 
-	int ver[2];
-	glGetIntegerv( GL_MAJOR_VERSION, ver );
-	glGetIntegerv( GL_MINOR_VERSION, ver + 1 );
-	if( ver[0] * 10 + ver[1] < MRPG_GL_VERSION )
-		exit(1025);
+    int ver[2];
+    glGetIntegerv( GL_MAJOR_VERSION, ver );
+    glGetIntegerv( GL_MINOR_VERSION, ver + 1 );
+    if( ver[0] * 10 + ver[1] < MRPG_GL_VERSION )
+        exit(1025);
 
 
     return;
@@ -178,7 +191,7 @@ inline void MainLoop::SetupOGLState()
 
 
 MainLoop::MainLoop( Level* l, Player* p ):
- level(l), player(p)
+    level(l), player(p)
 {
 
     screen_x= 1024;
@@ -192,7 +205,7 @@ MainLoop::MainLoop( Level* l, Player* p ):
     GetGLFunctions();
     SetupOGLState();
 
-   renderer= new Renderer( level, player );
+    renderer= new Renderer( level, player );
 }
 
 void MainLoop::Loop()
@@ -225,20 +238,52 @@ void MainLoop::Loop()
             char       buffer[1];
 
             kevent = (XKeyEvent *) &event;
-            if (   (XLookupString((XKeyEvent *)&event,buffer,1,&keysym,NULL) == 1)
-                    && (keysym == (KeySym)XK_Escape) )
-                exit(0);
-            break;
-        }
-        case ButtonPress:
-            switch (event.xbutton.button)
+
+
+            if( XLookupString((XKeyEvent *)&event,buffer,1,&keysym,NULL) != 1 )
+                break;
+
+
+            switch (keysym)
             {
+            case XK_Up:
+
+                break;
+
+            case XK_Down:
+                break;
+
+			case XK_Escape:
+			case XK_Q:
+			case XK_q:
+				exit(0);
+
             default:
                 break;
             }
             break;
+        }//key press
+
+        case ButtonPress:
+        {
+            switch (event.xbutton.button)
+            {
+            case Button4:
+                renderer->ZoomIn();
+                break;
+
+            case Button5:
+                renderer->ZoomOut();
+                break;
+
+            default:
+                break;
+            }
+        }//mouse button press
+        break;
+
         case ConfigureNotify:
-        XResizeWindow( dpy, win, screen_x, screen_y );
+            // XResizeWindow( dpy, win, screen_x, screen_y );
 
         case Expose:
             break;

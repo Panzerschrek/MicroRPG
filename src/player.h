@@ -9,7 +9,7 @@ class Player
 public:
     Player(Level * const lev) :
         level(lev),
-        microbe(new Microbe(0.1f, 0.1f))
+        microbe(new Microbe(0.0f, 0.0f))
     {
         level->addMicrobe(microbe, microbe->X(), microbe->Y());
     }

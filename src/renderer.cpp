@@ -18,7 +18,7 @@ void Mesh::Draw()
 }
 
 Renderer::Renderer( Level* l, Player* p ):
-    level(l), player(p)
+    level(l), player(p), scene_scale(1.0f)
 {
 
     int v[4];
@@ -50,12 +50,12 @@ Renderer::Renderer( Level* l, Player* p ):
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
 
 
-   // GenRoundBody( &part_meshes[ PART_ROUND_BODY ] );
-   // GenDefaultShell( &part_meshes[ PART_DEFAULT_SHELL ] );
+    // GenRoundBody( &part_meshes[ PART_ROUND_BODY ] );
+    // GenDefaultShell( &part_meshes[ PART_DEFAULT_SHELL ] );
     //GenDefaultNucleus( &part_meshes[ PART_DEFAULT_NUCLEUS ] );
     //GenFlagellum( &part_meshes[ PART_FLAGELLUM ] );
     for( int i= 0; i< PART_COUNT; i++ )
-    	generation_func_table[i]( &part_meshes[i] );
+        generation_func_table[i]( &part_meshes[i] );
 
 
 }
@@ -109,29 +109,39 @@ void Renderer::Draw()
         float mat[3][16];
 
         Mat4Identity( mat[0] );//scale matrix
-        mat[0][0]= float( screen_y ) / float( screen_x ) * 0.25f;
-        mat[0][5]= 0.25f;
+        mat[0][0]= float( screen_y ) / float( screen_x ) * scene_scale;
+        mat[0][5]= scene_scale;
 
         Mat4Identity( mat[1] );//translate matirx
-        mat[1][12]= -microbe->X();
-        mat[1][13]= -microbe->Y();
-        Mat4Mul( mat[0], mat[1], mat[2] );
+        mat[1][12]= microbe->X();
+        mat[1][13]= microbe->Y();
+        //Mat4Mul( mat[0], mat[1], mat[2] );
+
+        Mat4Identity( mat[2] );//rotate matrix
+        mat[2][0]= cos( microbe->Dir() );
+        mat[2][1]= sin( microbe->Dir() );
+        mat[2][4]= -mat[2][1];
+        mat[2][5]= mat[2][0];
+
+		//rotate * translate * scale
+        Mat4Mul( mat[2], mat[1] );
+        Mat4Mul( mat[2], mat[0] );
 
 
         microbes_shader.UniformMat4( 0, mat[2] );
 
-         for( int j= 0; j< PART_COUNT; j++ )
-         {
-         	if( generation_func_animation_table[j] )
-         		generation_func_table[j]( &part_meshes[j] );
+        for( int j= 0; j< PART_COUNT; j++ )
+        {
+            if( generation_func_animation_table[j] )
+                generation_func_table[j]( &part_meshes[j] );
 
-         	microbes_vbo.VertexSubData( part_meshes[j].vertices,
-                                    part_meshes[j].vertex_count * sizeof(MicrobeVertex), 0 );
-			if(  part_meshes[j].indeces != NULL )
-				microbes_vbo.IndexSubData( part_meshes[j].indeces,
-									part_meshes[j].index_count * sizeof(short), 0 );
-       	 part_meshes[j].Draw();
-         }
+            microbes_vbo.VertexSubData( part_meshes[j].vertices,
+                                        part_meshes[j].vertex_count * sizeof(MicrobeVertex), 0 );
+            if(  part_meshes[j].indeces != NULL )
+                microbes_vbo.IndexSubData( part_meshes[j].indeces,
+                                           part_meshes[j].index_count * sizeof(short), 0 );
+            part_meshes[j].Draw();
+        }
     }
 
 

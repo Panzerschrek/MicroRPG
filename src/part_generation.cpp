@@ -146,10 +146,10 @@ void GenFlagellum( Mesh* m )
 
     float a= 2.0f * MRPG_PI * float( clock() ) / float( CLOCKS_PER_SEC );
     float da= 6.0f * MRPG_PI / float( segment_count );
-    float y= 1.0f;
-    float dy= 2.0f / float( segment_count );
+    float y= -1.0f;
+    float dy= -2.0f / float( segment_count );
     float width= 0.15f;
-    float d_w= width / float( segment_count );
+    float d_w= width / float( segment_count +1 );
     float amplitude= 0.0625f;
     for( unsigned int i= 0; i< segment_count *2 + 2; i+=2, a+= da, y+= dy, width-= d_w )
     {

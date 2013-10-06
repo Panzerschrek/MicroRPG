@@ -66,6 +66,8 @@
 		<Unit filename="src/micro_rpg.h" />
 		<Unit filename="src/microbe.cpp" />
 		<Unit filename="src/microbe.h" />
+		<Unit filename="src/part_generation.cpp" />
+		<Unit filename="src/part_generation.h" />
 		<Unit filename="src/player.h" />
 		<Unit filename="src/renderer.cpp" />
 		<Unit filename="src/renderer.h" />

@@ -4,7 +4,7 @@
 Level::Level() :
     lastMicrobeIndex(0)
 {
-    //addMicrobe(new Microbe(0.4f, 0.4f), 0.4f, 0.4f);
+    addMicrobe(new Microbe(2.0f, 2.0f), 2.0f, 2.0f);
 }
 
 Level::~Level()

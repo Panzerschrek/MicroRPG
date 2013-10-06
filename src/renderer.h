@@ -37,6 +37,10 @@ class Renderer
 	Renderer( Level* l, Player* p );
 	~Renderer(){}
 
+	void SetSceneScale( float s );
+	void ZoomIn();
+	void ZoomOut();
+
 	void Draw();
 
 	private:
@@ -53,10 +57,29 @@ class Renderer
 	GLuint background_texture;
 
 	unsigned int screen_x, screen_y;
+	float scene_scale;
 
 	Mesh part_meshes[64];
 
 
 };
+
+inline void Renderer::SetSceneScale( float s )
+{
+	scene_scale= s;
+}
+
+inline void Renderer::ZoomIn()
+{
+	if( scene_scale <= 1.0f )
+		scene_scale*= 2.0f;
+}
+
+inline void Renderer::ZoomOut()
+{
+	if( scene_scale>= 0.0625f )
+		scene_scale*= 0.5f;
+}
+
 
 #endif//RENDERER_H

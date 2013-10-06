@@ -16,6 +16,19 @@ void Vec3Mat4Mul( const float* v, const float* m, float* v_dst )
 		v_dst[i]= v[0] * m[i] + v[1] * m[i+4] + v[2] * m[i+8] + m[i+12];
 }
 
+//v_dst*= m
+void Vec3Mat4Mul( float* v_dst, const float* m )
+{
+	float v[3];
+	unsigned int i;
+	for( i= 0; i< 3; i++ )
+		v[i]= v_dst[i];
+
+	for( i= 0; i< 3; i++ )
+		v_dst[i]= v[0] * m[i] + v[1] * m[i+4] + v[2] * m[i+8] + m[i+12];
+
+}
+
 
 void Mat4Mul( const float* m1, const float* m2, float* m_dst )
 {
@@ -29,3 +42,20 @@ void Mat4Mul( const float* m1, const float* m2, float* m_dst )
 		}
 }
 
+//m1*= m2
+void Mat4Mul( float* m1_dst, const float* m2 )
+{
+	unsigned int i, j;
+	float m1[16];
+	for( i= 0; i< 16; i++ )
+		m1[i]= m1_dst[i];
+
+
+	for( i= 0; i< 4; i++ )
+		for( j= 0; j< 16; j+=4 )
+		{
+			m1_dst[ i + j ]= m1[ 0 + j ] * m2[ i ]   + 	 m1[ 1 + j ] * m2[ 4 + i ] +
+							m1[ 2 + j ] * m2[ 8 + i ]   +  m1[ 3 + j ] * m2[ 12 + i ];
+		}
+
+}
