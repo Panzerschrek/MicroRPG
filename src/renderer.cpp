@@ -8,6 +8,12 @@
 
 #include "part_generation.h"
 
+Mesh::Mesh()
+{
+    index_count= vertex_count= 0;
+    indeces= NULL;
+    vertices= NULL;
+}
 
 void Mesh::Draw()
 {
@@ -18,7 +24,7 @@ void Mesh::Draw()
 }
 
 Renderer::Renderer( Level* l, Player* p ):
-    level(l), player(p), scene_scale(1.0f)
+    level(l), player(p), scene_scale(0.25f)
 {
 
     int v[4];

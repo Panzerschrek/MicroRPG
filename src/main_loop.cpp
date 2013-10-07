@@ -7,7 +7,7 @@ MainLoop* MainLoop::current_main_loop= NULL;
 #ifdef MRPG_OS_WINDOWS
 
 
-#define KEY(x) (65 + 'A' - x)
+#define KEY(x) (65 + x - 'A' )
 LRESULT CALLBACK MainLoop::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
     if( uMsg == WM_CLOSE )
@@ -35,6 +35,18 @@ LRESULT CALLBACK MainLoop::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARA
 			break;
 		}
     }//key down
+    break;
+
+    case WM_MOUSEWHEEL:
+     {
+
+        if( GET_WHEEL_DELTA_WPARAM(wParam) > 1 )
+            current_main_loop->renderer->ZoomIn();
+        else
+            current_main_loop->renderer->ZoomOut();
+     }
+     break;
+
 #ifdef MRPG_DEBUG
         printf( "key: %d\n", wParam );
 #endif
@@ -156,7 +168,7 @@ inline void MainLoop::InitOGL()
     win = XCreateWindow(dpy, RootWindow(dpy, vi->screen), 0, 0,
                         screen_x, screen_y, 0, vi->depth, InputOutput, vi->visual,
                         CWBorderPixel | CWColormap | CWEventMask, &swa);
-    XSetStandardProperties(dpy, win, "main", "main", None,
+    XSetStandardProperties(dpy, win, "MicroRPG", "MicroRPG", None,
                            NULL, 0, NULL);
 
 

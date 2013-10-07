@@ -91,6 +91,7 @@
 			ConfigurationType="1"
 			UseOfMFC="0"
 			CharacterSet="2"
+			ManagedExtensions="0"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -110,11 +111,13 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/GS- /QIfist"
 				Optimization="1"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
 				FavorSizeOrSpeed="2"
-				PreprocessorDefinitions="MRPG_OS_WINDOWS"
+				WholeProgramOptimization="false"
+				PreprocessorDefinitions="MRPG_OS_WINDOWS;MRPG_IA32_MASM"
 				ExceptionHandling="0"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -135,6 +138,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalOptions="/NODEFAULTLIB:&quot;msvcrt.lib&quot;"
 				OutputFile="MicroRPG.exe"
 				GenerateManifest="false"
 				GenerateDebugInformation="false"
@@ -205,6 +209,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\part_generation.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\renderer.cpp"
 				>
 			</File>
@@ -267,6 +275,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\part_generation.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\player.h"
 				>
 			</File>
@@ -293,6 +305,10 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
+		<File
+			RelativePath=".\MSVCRT-VS6.LIB"
+			>
+		</File>
 		<File
 			RelativePath="..\..\Program Files\Microsoft SDKs\Windows\v6.0A\Lib\OpenGL32.Lib"
 			>

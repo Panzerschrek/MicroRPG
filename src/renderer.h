@@ -22,6 +22,7 @@ class Mesh
 {
 public:
 
+    Mesh();
     MicrobeVertex* vertices;
     unsigned short* indeces;
     unsigned int vertex_count, index_count;

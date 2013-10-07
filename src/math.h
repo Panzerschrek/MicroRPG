@@ -26,24 +26,24 @@ if target is win32 and compiler is M$ Visual Studio default math functions from 
 
 #ifdef MRPG_IA32_MASM
 
-inline void cos( float a )
+inline float cos( float a )
 {
     float r;
     __asm
     {
-        fld x
+        fld a
         fcos
         fstp r
     }
     return r;
 }
 
-inline void sin( float a )
+inline float sin( float a )
 {
     float r;
     __asm
     {
-        fld x
+        fld a
         fsin
         fstp r
     }
@@ -51,12 +51,12 @@ inline void sin( float a )
 }
 
 
-float tan( float x )
+inline float tan( float a )
 {
     float r;
     __asm
     {
-        fld x
+        fld a
         fptan
         fstp r
         fstp r
@@ -64,7 +64,7 @@ float tan( float x )
     return r;
 }
 
-float fabs( float x )
+inline float fabs( float x )
 {
     float r;
     __asm

@@ -1,6 +1,8 @@
 #include "micro_rpg.h"
 #include "main_loop.h"
 #include "renderer.h"
+
+
 int main()
 {
     Level* level= new Level();
